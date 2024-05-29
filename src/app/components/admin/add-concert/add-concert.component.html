@@ -1,0 +1,71 @@
+<!-- @if(data) {
+<pre>
+        <code>
+            {{data|json}}
+        </code>
+    </pre> -->
+<div class="title"
+    mat-dialog-title>{{data.concert.date|date}}</div>
+<!-- } -->
+
+<mat-dialog-content>
+
+    @if(artists.length){
+    <ul class="artists">
+        @for(artist of artists;track artist; let index = $index){
+
+        <li class="artist">
+            <div class="left">
+
+                <div class="name">{{artist.name}}</div>
+                <div class="move">
+                    @if(index != 0) {
+                    <button mat-icon-button
+                        (click)="onMove('up', index)">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                    }
+                    <!-- @if(index != artists.length - 1){ -->
+                    <button mat-icon-button
+                        [disabled]="index == artists.length - 1"
+                        (click)="onMove('down', index)"
+                        [ngStyle]="index == artists.length - 1 ? {visibility:'hidden'}: null">
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <!-- } -->
+                </div>
+            </div>
+            <div class="right">
+                <div class="is-featured">
+                    <mat-checkbox [checked]="getIsFeatured(artist.id)"
+                        (change)="onCheckboxChange($event, index)"></mat-checkbox>
+                </div>
+                <button mat-icon-button
+                    color="warn"
+                    (click)="onDelete(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+        </li>
+        }
+
+    </ul>
+    }
+    <form [formGroup]="form">
+        <mat-form-field>
+            <mat-label>add artist</mat-label>
+            <mat-select formControlName="artist"
+                (selectionChange)="artistSelected()">
+                @for (artist of adminStore.artists(); track artist) {
+                <mat-option [value]="artist">{{artist.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button
+        (click)="onSubmit()">{{editmode ? 'update':'add'}}&nbsp;concert</button>
+</mat-dialog-actions>

@@ -1,0 +1,27 @@
+mat-sidenav-container {
+    height: 100%;
+    mat-sidenav {
+        width: 80%;
+
+        max-width: 15rem;
+    }
+    mat-sidenav-content {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        height: 100%;
+        app-toolbar {
+            grid-area: header;
+        }
+        main {
+            overflow: auto;
+            grid-area: main;
+        }
+        app-footer {
+            grid-area: footer;
+        }
+    }
+}

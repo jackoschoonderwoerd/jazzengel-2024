@@ -1,0 +1,35 @@
+<div class="container">
+    <mat-nav-list>
+        <a mat-list-item
+            (click)="onCloseSidenav()"
+            routerLink="program">program</a>
+        <a mat-list-item
+            (click)="onCloseSidenav()"
+            routerLink="about">about</a>
+        @if(authStore.isLoggedIn()) {
+        <a mat-list-item
+            routerLink="artists"
+            (click)="onCloseSidenav()">artists</a>
+        <a mat-list-item
+            routerLink="stats"
+            (click)="onCloseSidenav()">stats</a>
+        }
+    </mat-nav-list>
+    <div class="buttons">
+        @if(!authStore.isLoggedIn()){
+        <button mat-icon-button
+            (click)="onLogin()">
+            <mat-icon>login</mat-icon>
+        </button>
+        } @else {
+        <button mat-icon-button
+            (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+        }
+        <button mat-icon-button
+            (click)="onCloseSidenav()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.appearance-app {
+    padding: 1rem 3rem;
+    .controls {
+        display: flex;
+        gap: 1rem;
+    }
+    table {
+        .name-cell {
+            text-transform: capitalize;
+        }
+    }
+}

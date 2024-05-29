@@ -37,6 +37,18 @@ yarn-error.log
 testem.log
 /typings
 
-# System files
+
+
+# System Files
 .DS_Store
 Thumbs.db
+tmp.json
+.firebase
+
+# miscelaneous
+environment.prod.ts
+environment.ts
+/scr/environments/
+/server/.env
+db-data.ts
+init-db.ts

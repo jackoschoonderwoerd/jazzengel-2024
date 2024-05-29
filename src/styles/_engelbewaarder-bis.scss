@@ -1,0 +1,15 @@
+.eb-course {
+    .eb-course-name {
+        background-color: var(--eb-orange);
+        color: var(--eb-blue);
+        text-transform: uppercase;
+        letter-spacing: 1.1px;
+        padding: 1rem;
+        font-weight: bold;
+    }
+    .eb-consumptions {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+}

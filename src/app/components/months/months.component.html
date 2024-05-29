@@ -1,0 +1,17 @@
+@for(month of adminStore.sortedConcerts(); track month ) {
+
+<mat-expansion-panel class="month">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{(month[0]).date|month}}
+        </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    @for(concert of month;track concert) {
+    <mat-accordion multi="false">
+        <app-date [concert]="concert"></app-date>
+    </mat-accordion>
+
+    }
+</mat-expansion-panel>
+}

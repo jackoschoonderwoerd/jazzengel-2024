@@ -1,0 +1,19 @@
+.app {
+    padding: 1rem 3rem;
+    display: flex;
+    gap: 1rem;
+    ul {
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid lightgray;
+            padding: 0 1rem;
+            .buttons {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+    }
+}

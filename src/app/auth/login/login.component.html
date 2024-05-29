@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>email</mat-label>
+        <input type="email"
+            matInput
+            formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>password</mat-label>
+        <input type="password"
+            matInput
+            formControlName="password">
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-raised-button
+            (click)="onSubmit()">submit</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</form>

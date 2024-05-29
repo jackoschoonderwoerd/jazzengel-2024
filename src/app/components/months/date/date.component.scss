@@ -1,0 +1,37 @@
+mat-expansion-panel {
+    background-color: var(--yellow);
+    border: 1px solid var(--purple);
+    mat-expansion-panel-header {
+        mat-panel-title {
+            // border: 2px solid red;
+            width: 2rem;
+            text-transform: uppercase;
+            color: var(--purple);
+            font-size: 1.1rem;
+            letter-spacing: 1.1px;
+        }
+        mat-panel-description {
+            height: 5rem !important;
+            // border: 3px solid red;
+            .date {
+                width: 1.5rem;
+                // border: 2px solid red;
+                display: flex;
+                justify-content: end;
+                margin-right: 1rem;
+            }
+            ul {
+                li {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+            color: var(--purple);
+            font-size: 1.1rem;
+            letter-spacing: 1.1px;
+        }
+    }
+}
+.mat-expansion-indicator::after {
+    color: var(--purple);
+}

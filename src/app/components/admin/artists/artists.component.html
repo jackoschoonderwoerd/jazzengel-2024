@@ -1,0 +1,24 @@
+<div class="app">
+    <ul>
+        @for(artist of adminStore.artists(); track artist){
+        <li>
+            <div class="name">{{artist.name}}</div>
+            <div class="buttons">
+                <button mat-icon-button
+                    class="edit"
+                    (click)="onEdit(artist)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                    class="delete"
+                    (click)="onDelete(artist.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+        </li>
+        }
+    </ul>
+    <button mat-raised-button
+        (click)="onAddArtist()">add artist</button>
+</div>

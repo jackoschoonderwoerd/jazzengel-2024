@@ -1,0 +1,15 @@
+.container {
+    height: 100%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    mat-nav-list {
+        width: 80vw;
+        max-width: 15rem;
+    }
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+}
