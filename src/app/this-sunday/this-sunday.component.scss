@@ -1,0 +1,33 @@
+.wrapper {
+    background-color: var(--purple);
+    padding: 1rem;
+    border: 3px solid var(--yellow);
+    .date {
+        display: flex;
+        justify-content: center;
+        color: (var(--yellow));
+    }
+    .artists {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .artist {
+            padding: 0.3rem 0.5rem;
+            border: 1px solid var(--yellow);
+            color: var(--yellow);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: center;
+            .instrument {
+                text-transform: lowercase;
+            }
+        }
+    }
+
+    .close {
+        color: (var(--yellow));
+        display: flex;
+        justify-content: end;
+    }
+}

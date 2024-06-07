@@ -11,20 +11,32 @@ import { Appearance } from '../../models/appearance';
 import { Artist } from "../../models/artist.model";
 import { Concert } from "../../models/concert.model";
 
+import { ArtistBooked } from "../../models/artist-booked.model";
+
 
 
 
 type AdminState = {
     artists: Artist[]
+    // artists2024: Artist2024[]
     concerts: Concert[];
-    sortedConcerts: any
+    sortedConcerts: any;
+    isLoading: boolean;
+    concertThisSunday: any;
+    selectedDateNumber: number;
+    selectedArtistId: string;
 }
 
 const initialState: AdminState = {
 
     artists: [],
+    // artists2024: [],
     concerts: [],
-    sortedConcerts: []
+    sortedConcerts: [],
+    isLoading: false,
+    concertThisSunday: null,
+    selectedDateNumber: null,
+    selectedArtistId: null
 }
 
 
@@ -39,12 +51,13 @@ export const AdminStore = signalStore(
     withMethods(
         (store, fs = inject(FirestoreService)) => ({
             async loadArtists() {
+                patchState(store, { isLoading: true })
                 const path = `artists`;
                 await fs.collection(path).subscribe((artists: Artist[]) => {
+
                     console.log(artists)
                     artists.sort((a: Artist, b: Artist) => a.name.localeCompare(b.name));
-                    console.log(artists)
-                    patchState(store, { artists })
+                    patchState(store, { artists, isLoading: false })
                 });
             },
             async loadConcerts() {
@@ -68,6 +81,38 @@ export const AdminStore = signalStore(
             async loadSortedConcerts(sortedConcerts: any) {
                 // console.log(sortedConcerts)
                 patchState(store, { sortedConcerts })
+            },
+            // async loadArtists2024() {
+            //     patchState(store, { isLoading: true })
+            //     const path = `artists-2024`
+            //     await fs.collection(path)
+            //         .subscribe((artists2024: Artist2024[]) => {
+            //             patchState(store, { isLoading: false })
+            //             patchState(store, { artists2024 })
+            //         })
+            // },
+            setConcertThisSunday(concert: Concert) {
+                console.log(concert)
+                const artists: Artist[] = []
+                concert.artistsBooked.forEach((artistBooked: ArtistBooked) => {
+                    const path = `artists/${artistBooked.artistId}`
+                    fs.getDoc(path).pipe(take(1)).subscribe((artist: Artist) => {
+                        artists.push(artist)
+                    })
+                    const concertThisSunday = {
+                        artists: artists,
+                        date: concert.date
+                    }
+                    patchState(store, { concertThisSunday })
+                })
+
+                // patchState(store, { concertThisSunday: concert })
+            },
+            setSelectedDateNumber(selectedDateNumber: number) {
+                patchState(store, { selectedDateNumber: selectedDateNumber })
+            },
+            setSelectedArtistId(id: string) {
+                patchState(store, { selectedArtistId: id })
             }
         })
     ),

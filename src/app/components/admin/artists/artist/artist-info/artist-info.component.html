@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-label>name</mat-label>
+        <input type="text"
+            matInput
+            formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>instrument</mat-label>
+        <input type="text"
+            matInput
+            formControlName="instrument">
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-raised-button
+            [disabled]="form.invalid"
+            (click)="addArtist()">{{editmode ? 'update':'add'}}&nbsp;artist</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+    </div>
+</form>

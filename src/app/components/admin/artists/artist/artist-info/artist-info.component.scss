@@ -1,0 +1,13 @@
+form {
+    padding: 1rem;
+    background-color: lightgray;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 375px;
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

@@ -1,32 +1,33 @@
-<mat-expansion-panel class="artist"
-    multi="false"
-    #mep="matExpansionPanel">
-    <mat-expansion-panel-header>
-        <mat-panel-title>
-            <div class="">
-                {{artist.name}}
-            </div>
-            <div class="">
-                {{artist.instrument}}
+<mat-accordion (click)="onArtistSelected($event)">
 
-            </div>
-        </mat-panel-title>
+    <mat-expansion-panel class="artist"
+        #mep="matExpansionPanel"
+        [expanded]="artist.id === adminStore.selectedArtistId() ">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="name">
+                    {{artist.name|capitalizeName}}
+                </div>
+                <div class="instrument">
+                    {{artist.instrument}}
 
-    </mat-expansion-panel-header>
-    <mat-card>
-        <mat-card-header>
-            {{artist.name}}
-        </mat-card-header>
-        <mat-card-content [innerHTML]="artist.biography">
-        </mat-card-content>
-        <img [src]="artist.imageUrl"
-            mat-card-image>
-        <mat-card-actions>
-            <button mat-icon-button
-                (click)="mep.expanded=false">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
-    <!-- {{artist|json}} -->
-</mat-expansion-panel>
+                </div>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <mat-tab-group>
+            <mat-tab class="image-tab"
+                label="Image">
+                <div class="image-container">
+                    <img [src]="artist.imageUrl">
+                </div>
+            </mat-tab>
+            <mat-tab class="biography-tab"
+                label="Biography">
+                <div class="biography"
+                    [innerHTML]="artist.biography"></div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </mat-expansion-panel>
+</mat-accordion>

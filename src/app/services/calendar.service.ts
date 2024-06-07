@@ -21,10 +21,12 @@ export class CalendarService {
             // 002
             return this.addEmptyArtistsBookedArrayToDates(dates)
         }).then((concerts: any) => {
+            console.log(concerts)
             // 003
             return this.combineDatesAndConcerts(concerts)
         }).then((concerts: any) => {
             // 004
+            this.getConcertNextSunday(concerts)
             return this.distributeSundaysByMonth(concerts)
         }).then((concerts: any) => {
             // 005
@@ -40,16 +42,10 @@ export class CalendarService {
         const promise = new Promise((resolve, reject) => {
 
             var date = new Date();
-            date.setDate(date.getDate() - date.getDay()); //start at last sunday
+            date.setDate(date.getDate() - date.getDay() + 7); //start at next sunday
 
             var dates = [];
-            // var concerts: Concert[] = [];
             for (var i = 0; i < 50; i++) {
-                // const concert: Concert = {
-                //     date: new Date(date),
-                //     artistsBooked: []
-                // }
-                // concerts.push(concert)
                 dates.push(new Date(date));
                 date.setDate(date.getDate() + 7); //add a week
 
@@ -67,7 +63,13 @@ export class CalendarService {
             for (var i = 0; i < 50; i++) {
                 const concert: Concert = {
                     date: new Date(dates[i]),
-                    artistsBooked: []
+                    artistsBooked: [
+
+                        { artistId: 'VU0hRYdxfsjoL5BkRzwx', isFeatured: true }, // Leo
+                        { artistId: '220I8XV6VBgG1CjjlFRe', isFeatured: false }, // Leo
+                        { artistId: 'PnuTe0oJsJ1gQaA6uUuU', isFeatured: false }, // Jacko
+                        { artistId: '8dUKRdXtgN5ENUX4mASs', isFeatured: false }, // Victor
+                    ]
                 }
                 concerts.push(concert)
                 resolve(concerts)
@@ -83,6 +85,7 @@ export class CalendarService {
         ]
         // concerst = dates.sort()
         concerts.forEach((concert: Concert) => {
+
             switch (concert.date.getMonth()) {
                 case 0:
                     sundaysPerMonth[0].push(concert);
@@ -137,7 +140,6 @@ export class CalendarService {
             // console.log(emptyConcerts)
 
             this.fs.collection(`concerts`).subscribe((bookedConcerts: any[]) => {
-                console.log(bookedConcerts[0])
                 bookedConcerts.forEach((bookedConcert: any) => {
                     bookedConcert.date = new Date(bookedConcert.date.seconds * 1000)
                 })
@@ -174,5 +176,22 @@ export class CalendarService {
             resolve(concerts)
         })
         return promise
+    }
+    getConcertNextSunday(concerts: Concert[]) {
+        console.log(concerts);
+        var date = new Date();
+        date.setDate(date.getDate() - date.getDay() + 7);
+        const nextSunday: Date = date
+        const index = concerts.findIndex((concert: Concert) => {
+            return nextSunday.getDay() === concert.date.getDay() && nextSunday.getMonth() === concert.date.getMonth()
+        });
+        // concerts.forEach((concert: Concert) => {
+        //     console.log(concert.date.getTime())
+        //     console.log(nextSunday.getTime())
+        // })
+        this.adminStore.setConcertThisSunday(concerts[index]);
+        // console.log(concerts[index])
+        // return(concerts[index])
+
     }
 }

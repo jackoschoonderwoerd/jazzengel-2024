@@ -1,12 +1,17 @@
-mat-expansion-panel {
-    background-color: var(--purple);
-    border: 1px solid var(--yellow);
-    mat-expansion-panel-header {
-        mat-panel-title {
-            text-transform: uppercase;
-            color: var(--yellow);
-            font-size: 1.1rem;
-            letter-spacing: 1.1px;
+mat-accordion {
+    mat-expansion-panel {
+        margin: auto;
+        min-width: 370px;
+        max-width: 30rem;
+        background-color: var(--purple);
+        border: 1px solid var(--yellow);
+        mat-expansion-panel-header {
+            mat-panel-title {
+                text-transform: uppercase;
+                color: var(--yellow);
+                font-size: 1.1rem;
+                letter-spacing: 1.1px;
+            }
         }
     }
 }

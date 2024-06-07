@@ -1,24 +1,30 @@
-<div class="app">
-    <ul>
-        @for(artist of adminStore.artists(); track artist){
-        <li>
-            <div class="name">{{artist.name}}</div>
-            <div class="buttons">
-                <button mat-icon-button
-                    class="edit"
-                    (click)="onEdit(artist)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button
-                    class="delete"
-                    (click)="onDelete(artist.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
+@if(adminStore.isLoading()){
+<mat-spinner color="primary">
+</mat-spinner>
+}
+@if(!adminStore.isLoading()){
 
-        </li>
-        }
-    </ul>
+<div class="artists">
     <button mat-raised-button
         (click)="onAddArtist()">add artist</button>
+    @for(artist of adminStore.artists(); track artist){
+    <div class="artist">
+        <div class="name">{{artist.name}}</div>
+        <!-- <div class="id">{{artist.id}}</div> -->
+        <div class="buttons">
+            <button mat-icon-button
+                class="edit"
+                (click)="onEdit(artist)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button
+                class="delete"
+                (click)="onDelete(artist.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    }
 </div>
+}

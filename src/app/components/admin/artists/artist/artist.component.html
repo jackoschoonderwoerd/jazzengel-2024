@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <div class="preview">
+        <div class="name_instrument">
+            @if(artist?.name) {
+            <div class="name">{{artist?.name|capitalizeName}}</div>
+            <div class="filler"></div>
+            }
+            <div class="instrument">{{artist?.instrument}}</div>
+            <mat-icon (click)="onEditArtistInfo()">edit</mat-icon>
+        </div>
+
+        <div class="scrollable">
+            <div class="image-container">
+                <!-- @if(artist?.imageUrl) { -->
+                <button mat-icon-button
+                    (click)="onEditImage()">
+                    <mat-icon>image</mat-icon>
+                </button>
+
+                <img [src]="artist?.imageUrl"
+                    alt="">
+                <!-- } -->
+            </div>
+            <div class="biography-container">
+                <button mat-icon-button
+                    (click)="onEditBiography()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <div class="biography"
+                    [innerHTML]="artist?.biography"></div>
+            </div>
+        </div>
+    </div>
+    <button mat-raised-button
+        (click)="onBackToArtists()">back to artists </button>
+
+
+    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ut quam eum non pariatur reprehenderit magni suscipit eveniet at id delectus minus dolorum in, quas consequatur mollitia beatae laboriosam possimus nostrum debitis ratione natus minima quidem placeat! Nulla cumque, cum accusamus eos deleniti error quas sunt? Ipsum deleniti temporibus aspernatur blanditiis omnis quibusdam modi totam nulla excepturi? Consectetur aperiam accusantium, consequatur error nostrum dolore magnam molestiae, corporis earum reprehenderit possimus praesentium minima, fugiat id velit! Facere maiores nostrum laudantium quia libero atque, eaque laboriosam veritatis distinctio recusandae quos alias vel quo. Esse quo iusto commodi sequi rem voluptatibus blanditiis magnam! -->
+
+
+</div>

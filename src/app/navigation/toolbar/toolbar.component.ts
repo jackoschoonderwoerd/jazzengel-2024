@@ -22,29 +22,14 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent {
     authStore = inject(AuthStore)
-    dialog = inject(MatDialog)
-    router = inject(Router)
 
     @Output() sidenavToggle = new EventEmitter<void>
 
-    onLogin() {
-        const dialogRef = this.dialog.open(LoginComponent)
-        dialogRef.afterClosed().subscribe((loginData: UserLogin) => {
-            this.authStore.login(loginData).then((res: any) => {
-                this.router.navigateByUrl('admin')
-
-            })
-        })
-    }
 
     onMenu() {
         console.log(' menu')
         this.sidenavToggle.emit()
     }
 
-    onLogout() {
-        this.authStore.logout().then((res: any) => {
-            this.router.navigateByUrl('program')
-        });
-    }
+
 }

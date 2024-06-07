@@ -21,7 +21,9 @@ mat-sidenav-container {
             grid-area: main;
         }
         app-footer {
+            height: 2rem;
             grid-area: footer;
+            background-color: aqua;
         }
     }
 }

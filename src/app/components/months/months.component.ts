@@ -14,6 +14,7 @@ import { CalendarService } from '../../services/calendar.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MonthPipe } from '../../pipes/month.pipe';
 import { DateComponent } from './date/date.component';
+import { ThisSundayComponent } from '../../this-sunday/this-sunday.component';
 
 @Component({
     selector: 'app-concerts',
@@ -36,11 +37,18 @@ export class MonthsComponent implements OnInit {
     fs = inject(FirestoreService)
     calendarService = inject(CalendarService)
     dates: any
+    isExpanded: boolean = false;
+    selectedMonthNumber: number = new Date().getMonth();
 
 
     ngOnInit(): void {
         this.adminStore.loadConcerts();
         this.dates = this.calendarService.getCalendar();
+        this.dialog.open(ThisSundayComponent)
+    }
+    monthSelected(month) {
+        // const monthNumber = new Date(month.date).getMonth()
+        this.selectedMonthNumber = new Date(month.date).getMonth()
     }
 
 }

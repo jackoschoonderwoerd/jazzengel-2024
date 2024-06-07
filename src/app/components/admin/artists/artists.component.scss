@@ -1,19 +1,21 @@
-.app {
-    padding: 1rem 3rem;
-    display: flex;
-    gap: 1rem;
-    ul {
-        li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            border: 1px solid lightgray;
-            padding: 0 1rem;
-            .buttons {
-                display: flex;
-                gap: 1rem;
-            }
-        }
+mat-spinner {
+    margin: 3rem auto;
+}
+.artists {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    gap: 0.3rem;
+    .artist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid lightgray;
+        padding: 0.3rem 1rem;
+    }
+    .buttons {
+        display: flex;
+        gap: 1rem;
     }
 }

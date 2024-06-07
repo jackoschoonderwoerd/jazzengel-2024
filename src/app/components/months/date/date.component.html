@@ -1,25 +1,26 @@
-<mat-expansion-panel class="date">
-    <mat-expansion-panel-header [style]="getHeight()">
-        <!-- <mat-panel-title (click)="onDate($event)">
-            <div class="date">{{concert.date.getDate()}}</div>
-        </mat-panel-title> -->
-        <mat-panel-description>
-            <div class="date"
-                (click)="onDate($event)">{{concert.date.getDate()}}</div>
-            <ul>
-                @for(artist of featuredArtists;track artist) {
-                <li>
-                    {{artist.name|capitalizeName}}
-                </li>
-                }
-            </ul>
-        </mat-panel-description>
-    </mat-expansion-panel-header>
-    @for(artist of artists;track artist){
-    <mat-accordion multi="false">
+ <mat-accordion>
+     <mat-expansion-panel class="date"
+         [expanded]="(concert.date.getDate() === adminStore.selectedDateNumber())">
+         <mat-expansion-panel-header (click)="onDateSelected($event)"
+             [style]="getHeight()">
+             <mat-panel-description>
+                 <div class="date"
+                     (click)="onDate($event)">{{concert.date.getDate()}}</div>
+                 <ul>
+                     @for(artist of featuredArtists;track artist) {
+                     <li>
+                         {{artist.name|capitalizeName}}
+                     </li>
+                     }
+                 </ul>
+             </mat-panel-description>
+         </mat-expansion-panel-header>
+         @for(artist of artists;track artist){
 
-        <app-artist-bio [artist]="artist"></app-artist-bio>
 
-    </mat-accordion>
-    }
-</mat-expansion-panel>
+         <app-artist-bio [artist]="artist"></app-artist-bio>
+
+
+         }
+     </mat-expansion-panel>
+ </mat-accordion>

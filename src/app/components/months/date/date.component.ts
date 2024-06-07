@@ -8,8 +8,10 @@ import { JsonPipe, NgStyle } from '@angular/common';
 import { ArtistBooked } from '../../../models/artist-booked.model';
 import { ArtistBioComponent } from './artist-bio/artist-bio.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddConcertComponent } from '../../admin/add-concert/add-concert.component';
+import { AddConcertComponent } from './add-concert/add-concert.component';
 import { CapitalizeNamePipe } from '../../../pipes/capitalize-name.pipe';
+import { ThisSundayComponent } from '../../../this-sunday/this-sunday.component';
+import { AdminStore } from '../../admin/admin.store';
 
 @Component({
     selector: 'app-date',
@@ -29,15 +31,22 @@ export class DateComponent implements OnInit {
     @Input() public concert!: Concert;
     featuredArtists: Artist[] = [];
     artists: Artist[] = [];
+    adminStore = inject(AdminStore)
     fs = inject(FirestoreService);
     dialog = inject(MatDialog)
+    isExpanded: boolean = false;
+    selectedDateNumber: number;
+
 
 
     ngOnInit(): void {
-
+        // console.log(new Date(this.concert.date).getDate())
         if (this.concert.artistsBooked.length) {
             this.updateProgram()
         }
+        this.dateIsExpanded()
+        // this.dialog.open(ThisSundayComponent);
+
     }
 
     onDate(e: Event) {
@@ -52,6 +61,23 @@ export class DateComponent implements OnInit {
             console.log(data)
             this.updateProgram();
         })
+    }
+
+    onDateSelected(e: Event) {
+        e.stopPropagation();
+        this.selectedDateNumber = this.concert.date.getDate()
+        console.log(this.selectedDateNumber)
+        this.adminStore.setSelectedDateNumber(this.concert.date.getDate());
+    }
+    dateIsExpanded() {
+
+        const todayDate = new Date().getDate()
+        const concertDate = this.concert.date.getDate()
+        const todayMonth = new Date().getMonth()
+        const concertMonth = this.concert.date.getMonth()
+        if (concertDate > todayDate && concertDate < todayDate + 7 && todayMonth === concertMonth) {
+            // this.isExpanded = true
+        }
     }
 
     updateProgram() {

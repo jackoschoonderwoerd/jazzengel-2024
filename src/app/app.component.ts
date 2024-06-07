@@ -13,6 +13,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { FooterComponent } from './navigation/footer/footer.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ThisSundayComponent } from './this-sunday/this-sunday.component';
 
 @Component({
     selector: 'app-root',
@@ -34,18 +36,20 @@ export class AppComponent implements OnInit {
     adminStore = inject(AdminStore)
     title = 'jazzengel-2024';
     afAuth = inject(Auth);
+    dialog = inject(MatDialog)
 
     ngOnInit(): void {
         this.adminStore.loadConcerts();
         onAuthStateChanged(this.afAuth, (user: FirebaseUser | null) => {
             if (user) {
-                console.log(user)
                 this.auStore.persistLogin();
 
             } else {
                 console.log(' no user')
             }
         })
+
+
     }
 
 

@@ -8,11 +8,14 @@
             routerLink="about">about</a>
         @if(authStore.isLoggedIn()) {
         <a mat-list-item
-            routerLink="artists"
-            (click)="onCloseSidenav()">artists</a>
+            routerLink="admin/artists-2024"
+            (click)="onCloseSidenav()">artists-2024</a>
         <a mat-list-item
-            routerLink="stats"
+            routerLink="admin/stats"
             (click)="onCloseSidenav()">stats</a>
+        <a mat-list-item
+            routerLink="admin/artists"
+            (click)="onCloseSidenav()">artists</a>
         }
     </mat-nav-list>
     <div class="buttons">

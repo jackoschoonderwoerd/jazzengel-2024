@@ -1,6 +1,6 @@
 mat-expansion-panel {
     background-color: var(--yellow);
-    border: 1px solid var(--purple);
+    border-bottom: 20px solid var(--purple);
     mat-expansion-panel-header {
         mat-panel-title {
             // border: 2px solid red;
@@ -21,6 +21,8 @@ mat-expansion-panel {
                 margin-right: 1rem;
             }
             ul {
+                display: flex;
+                flex-direction: column;
                 li {
                     display: flex;
                     justify-content: space-between;

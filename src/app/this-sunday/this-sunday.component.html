@@ -1,0 +1,21 @@
+<div class="wrapper">
+
+    <div mat-dialog-title
+        class="date">{{adminStore.concertThisSunday()?.date|date}}</div>
+    <mat-dialog-content>
+        <div class="artists">
+            @for(artist of adminStore.concertThisSunday()?.artists; track artist.id) {
+            <div class="artist">
+                <div class="name">{{artist.name|capitalizeName}}</div>
+                <div class="instrument">{{artist.instrument}}</div>
+            </div>
+            }
+        </div>
+    </mat-dialog-content>
+
+    <div class="close"
+        (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </div>
+
+</div>

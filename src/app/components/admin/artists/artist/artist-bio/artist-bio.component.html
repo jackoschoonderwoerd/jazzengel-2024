@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+
+    <editor apiKey="n6z1jie1g7j3j6d4x9oyay4przt4ivupw964pkwl6c9t7j21"
+        [init]="tinymceInit"
+        formControlName="editor"></editor>
+    <div class="buttons">
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
+        <button mat-raised-button
+            (click)="onSaveChanges()">save changes</button>
+    </div>
+</form>

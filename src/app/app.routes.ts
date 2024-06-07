@@ -23,16 +23,21 @@ export const routes: Routes = [
         loadComponent: () => import('./components/visitor/about/about.component')
             .then(c => c.AboutComponent)
     },
-    {
-        path: 'artists',
-        loadComponent: () => import('./components/admin/artists/artists.component')
-            .then(c => c.ArtistsComponent)
-    },
-    {
-        path: 'stats',
-        loadComponent: () => import('./components/admin/stats/stats.component')
-            .then(c => c.StatsComponent)
-    },
+    // {
+    //     path: 'artists',
+    //     loadComponent: () => import('./components/admin/artists/artists.component')
+    //         .then(c => c.ArtistsComponent)
+    // },
+    // {
+    //     path: 'stats',
+    //     loadComponent: () => import('./components/admin/stats/stats.component')
+    //         .then(c => c.StatsComponent)
+    // },
+    // {
+    //     path: 'artist-2024',
+    //     loadComponent: () => import('./components/admin/artists-2024/artist-2024/artist-2024.component')
+    //         .then(c => c.FormViewComponent)
+    // },
     {
         path: '**', redirectTo: 'program'
     }

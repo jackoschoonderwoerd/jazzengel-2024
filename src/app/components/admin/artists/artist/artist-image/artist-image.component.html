@@ -1,0 +1,24 @@
+<div class="wrapper">
+    @if(!sourceIsFile){
+    <img class="old-image image"
+        [src]="imageUrl"
+        alt="">
+    }
+    @if(sourceIsFile){
+    <img class="new-image image"
+        [src]="image"
+        alt="">
+    }
+
+    <input type="file"
+        #fileInput
+        style="display: none;"
+        (change)="onFileInputChange($event)">
+    <div class="buttons">
+        <button mat-raised-button
+            (click)="fileInput.click()">select image
+        </button>
+        <button mat-raised-button
+            (click)="onDone()">done</button>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+.wrapper {
+    width: 375px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    // gap: 1rem;
+    .preview {
+        background-color: beige;
+        display: grid;
+        grid-template-rows: 3rem auto auto;
+        grid-template-areas:
+            "name_instrument"
+            "image"
+            "biography"
+            "buttons";
+
+        height: 667px;
+        margin-top: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        .name_instrument {
+            background-color: aqua;
+            z-index: 1;
+            grid-area: name_instrument;
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            height: 3rem;
+            padding: 0 1rem;
+            align-items: center;
+            .name {
+            }
+            .filler {
+                flex-grow: 1;
+            }
+        }
+        .scrollable {
+            overflow: auto;
+            .image-container {
+                min-height: 4rem;
+                position: relative;
+                button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background-color: white;
+                }
+                img {
+                    grid-area: image;
+                    width: 100%;
+                }
+            }
+            .biography-container {
+                min-height: 4rem;
+                position: relative;
+                button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background-color: white;
+                }
+                .biography {
+                    grid-area: biography;
+                    padding: 1rem 1rem 1rem 1rem;
+                }
+            }
+        }
+    }
+    button {
+        display: flex;
+    }
+}

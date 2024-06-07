@@ -8,7 +8,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class CapitalizeNamePipe implements PipeTransform {
 
     exeptions: string[] = [
-        'van', 'der', 'den'
+        'van', 'der', 'den', 'de'
     ]
 
     constructor(private _sanitizer: DomSanitizer) {
