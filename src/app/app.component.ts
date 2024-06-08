@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
         onAuthStateChanged(this.afAuth, (user: FirebaseUser | null) => {
             if (user) {
                 this.auStore.persistLogin();
+                this.adminStore.setVisibleWeeksAhead(50)
 
             } else {
                 console.log(' no user')

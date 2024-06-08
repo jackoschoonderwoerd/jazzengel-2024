@@ -39,13 +39,14 @@ export class CalendarService {
 
     // 001
     private getSundaysNowPlusYear() {
+        console.log(this.adminStore.visibleWeeksAhead());
         const promise = new Promise((resolve, reject) => {
 
             var date = new Date();
             date.setDate(date.getDate() - date.getDay() + 7); //start at next sunday
 
             var dates = [];
-            for (var i = 0; i < 50; i++) {
+            for (var i = 0; i < this.adminStore.visibleWeeksAhead(); i++) {
                 dates.push(new Date(date));
                 date.setDate(date.getDate() + 7); //add a week
 
@@ -170,10 +171,17 @@ export class CalendarService {
 
     }
     // 005
-    sortConcerts(concerts: Concert[][]) {
+    sortConcerts(concertArrays: Concert[][]) {
+        const notEmptyConcertArrays: Concert[][] = []
+        concertArrays.forEach((concertArray: Concert[]) => {
+            if (concertArray.length) {
+                notEmptyConcertArrays.push(concertArray)
+
+            }
+        })
         const promise = new Promise((resolve, reject) => {
-            concerts.sort((a: Concert[], b: Concert[]) => new Date(a[0].date).getTime() - new Date(b[0].date).getTime());
-            resolve(concerts)
+            notEmptyConcertArrays.sort((a: Concert[], b: Concert[]) => new Date(a[0].date).getTime() - new Date(b[0].date).getTime());
+            resolve(notEmptyConcertArrays)
         })
         return promise
     }

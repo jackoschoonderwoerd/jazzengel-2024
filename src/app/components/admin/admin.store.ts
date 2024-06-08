@@ -25,6 +25,7 @@ type AdminState = {
     concertThisSunday: any;
     selectedDateNumber: number;
     selectedArtistId: string;
+    visibleWeeksAhead: number
 }
 
 const initialState: AdminState = {
@@ -36,7 +37,8 @@ const initialState: AdminState = {
     isLoading: false,
     concertThisSunday: null,
     selectedDateNumber: null,
-    selectedArtistId: null
+    selectedArtistId: null,
+    visibleWeeksAhead: 12
 }
 
 
@@ -113,6 +115,10 @@ export const AdminStore = signalStore(
             },
             setSelectedArtistId(id: string) {
                 patchState(store, { selectedArtistId: id })
+            },
+            setVisibleWeeksAhead(visibleWeeksAhead: number) {
+                console.log(visibleWeeksAhead);
+                patchState(store, { visibleWeeksAhead: visibleWeeksAhead })
             }
         })
     ),
