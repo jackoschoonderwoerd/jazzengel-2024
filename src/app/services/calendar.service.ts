@@ -45,11 +45,22 @@ export class CalendarService {
             var date = new Date();
             date.setDate(date.getDate() - date.getDay() + 7); //start at next sunday
 
+
             var dates = [];
+
+
+
+            var today = new Date()
+            if (today.getDay() === 0 && today.getHours() < 19) { // IF TODAY IS A SUNDAY EARLIER THAN 19:00
+                dates.push(today)
+                console.log(today.getHours())
+            }
+            // console.log(date.getDay())
+
             for (var i = 0; i < this.adminStore.visibleWeeksAhead(); i++) {
                 dates.push(new Date(date));
                 date.setDate(date.getDate() + 7); //add a week
-
+                console.log(dates[0])
             }
             resolve(dates)
         })

@@ -12,6 +12,8 @@ import { AddConcertComponent } from './add-concert/add-concert.component';
 import { CapitalizeNamePipe } from '../../../pipes/capitalize-name.pipe';
 import { ThisSundayComponent } from '../../../this-sunday/this-sunday.component';
 import { AdminStore } from '../../admin/admin.store';
+import { Auth } from '@angular/fire/auth';
+import { AuthStore } from '../../../auth/auth.store';
 
 @Component({
     selector: 'app-date',
@@ -36,6 +38,8 @@ export class DateComponent implements OnInit {
     dialog = inject(MatDialog)
     isExpanded: boolean = false;
     selectedDateNumber: number;
+    auth = inject(Auth)
+    authStore = inject(AuthStore);
 
 
 
@@ -50,17 +54,23 @@ export class DateComponent implements OnInit {
     }
 
     onDate(e: Event) {
-        e.stopPropagation();
-        console.log(this.concert)
-        const dialogRef = this.dialog.open(AddConcertComponent, {
-            data: { concert: this.concert },
-            width: '40rem',
-            maxWidth: '60rem'
-        })
-        dialogRef.afterClosed().subscribe((data) => {
-            console.log(data)
-            this.updateProgram();
-        })
+
+
+
+        if (this.authStore.isLoggedIn) {
+            console.log(this.concert)
+            const dialogRef = this.dialog.open(AddConcertComponent, {
+                data: { concert: this.concert },
+                width: '40rem',
+                maxWidth: '60rem'
+            })
+            dialogRef.afterClosed().subscribe((data) => {
+                console.log(data)
+                this.updateProgram();
+            })
+        } else {
+            console.log('access denied')
+        }
     }
 
     onDateSelected(e: Event) {
