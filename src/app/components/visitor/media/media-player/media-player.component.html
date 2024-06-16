@@ -1,0 +1,15 @@
+<div class="wrapper">
+    @if(isLoading) {
+    <div class="spinner-container">
+        <mat-progress-spinner></mat-progress-spinner>
+    </div>
+    }
+    <iframe onload="stopLoading()"
+        [src]="downloadUrl()|safe"
+        allowfullscreen>
+    </iframe>
+    <button mat-icon-button
+        (click)="onMediaList()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>

@@ -33,6 +33,13 @@ export const ADMIN_ROUTES: Routes = [
         loadComponent: () => import('./artists/artist/artist-info/artist-info.component')
             .then(c => c.ArtistInfoComponent)
     },
+    {
+        path: 'upload-media',
+        loadComponent: () => import('./upload-media/upload-media.component')
+            .then(c => c.UploadMediaComponent),
+        loadChildren: () => import('./upload-media/upload-media.routes')
+            .then(r => r.UPLOAD_MEDIA_ROUTES)
+    }
 
 
     // {

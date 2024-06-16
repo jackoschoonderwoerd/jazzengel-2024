@@ -5,4 +5,5 @@ export interface Artist {
     biography: string;
     filePath: string;
     imageUrl: string;
+
 }

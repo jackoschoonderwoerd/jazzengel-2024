@@ -15,6 +15,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MonthPipe } from '../../pipes/month.pipe';
 import { DateComponent } from './date/date.component';
 import { ThisSundayComponent } from '../../this-sunday/this-sunday.component';
+import { FirebaseError } from '@angular/fire/app';
 
 @Component({
     selector: 'app-concerts',
@@ -45,6 +46,14 @@ export class MonthsComponent implements OnInit {
         this.adminStore.loadConcerts();
         this.dates = this.calendarService.getCalendar();
         this.dialog.open(ThisSundayComponent)
+
+        this.fs.asyncCollection(`artists`)
+            .then((data: any) => {
+                console.log(data)
+            })
+            .catch((err: FirebaseError) => {
+                console.error(`failed: ${err.message}`)
+            })
     }
     monthSelected(month) {
         // const monthNumber = new Date(month.date).getMonth()

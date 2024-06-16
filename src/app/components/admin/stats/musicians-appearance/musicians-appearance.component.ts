@@ -15,6 +15,11 @@ import { take } from 'rxjs';
 
 
 
+import { MatSelectionListChange } from '@angular/material/list';
+
+
+
+
 
 @Component({
     selector: 'app-musicians-appearance',
@@ -30,6 +35,7 @@ import { take } from 'rxjs';
         FormsModule,
         JsonPipe,
         DatePipe,
+
     ],
     templateUrl: './musicians-appearance.component.html',
     styleUrl: './musicians-appearance.component.scss'
@@ -45,21 +51,22 @@ export class MusiciansAppearanceComponent implements OnInit {
     instruments: string[] = [];
     appearances: Appearance[] = [];
     BdBSHidden: boolean = false;
+    drumsHidden: boolean = false
     queryValue: string = ''
+
 
     ngOnInit(): void {
         const path = `bookings`;
-        const names: string[] = [];
         this.fs.collection(path).pipe(take(1)).subscribe((bookings: any) => {
             bookings.forEach((booking: any) => {
                 this.appearances.push(this.extractAppearance(booking.booking));
 
             })
             this.extractNames(bookings);
-            this.extractInstruments(bookings)
+            this.extractInstruments(bookings);
             this.dataSource = new MatTableDataSource(this.appearances)
             this.dataSource.sort = this.sort;
-            this.onToggleBdBS()
+            this.onToggleBouwmeesterDeBooSchoonderwoerd()
         })
     }
 
@@ -72,6 +79,10 @@ export class MusiciansAppearanceComponent implements OnInit {
     onNameSelected(e: any) {
         const filterValue = e.value
         this.dataSource.filter = filterValue.trim().toLowerCase()
+    }
+    onSeasonSelected(result: any) {
+        console.log(result.value)
+        // const dateRange: MyDateRange = result.value
     }
     onInputChange(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value
@@ -106,7 +117,8 @@ export class MusiciansAppearanceComponent implements OnInit {
         });
     }
 
-    onToggleBdBS() {
+
+    onToggleBouwmeesterDeBooSchoonderwoerd() {
         this.hideBdBSfromNames();
         this.toggleBdBSFromAppearances();
         this.dataSource.sort = this.sort;
@@ -141,6 +153,9 @@ export class MusiciansAppearanceComponent implements OnInit {
             this.dataSource = new MatTableDataSource(this.appearances)
         }
         this.BdBSHidden = !this.BdBSHidden
+    }
+    pickerResult(result: any) {
+        console.log(result.value)
     }
 
 }

@@ -18,6 +18,7 @@
             </mat-select>
         </mat-form-field>
 
+
         <mat-form-field>
             <mat-label>Select instrument</mat-label>
             <mat-select (selectionChange)="onInstrumentSelected($event)">
@@ -28,8 +29,10 @@
                 }
             </mat-select>
         </mat-form-field>
+
         <button mat-raised-button
-            (click)="onToggleBdBS()">{{BdBSHidden ?'show':'hide'}}&nbsp; B dB S</button>
+            (click)="onToggleBouwmeesterDeBooSchoonderwoerd()">{{BdBSHidden ?'show':'hide'}}&nbsp; B dB S</button>
+
     </div>
 
     <table mat-table

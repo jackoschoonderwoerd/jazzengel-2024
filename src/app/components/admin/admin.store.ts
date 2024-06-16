@@ -4,21 +4,19 @@ import { inject } from "@angular/core";
 import { FirestoreService } from "./../../services/firestore.service";
 
 
-import { map, take } from "rxjs";
-import { setPersistence } from "@angular/fire/auth";
-import { Booking } from "../../models/booking.model";
-import { Appearance } from '../../models/appearance';
+import { take } from "rxjs";
+
 import { Artist } from "../../models/artist.model";
 import { Concert } from "../../models/concert.model";
 
 import { ArtistBooked } from "../../models/artist-booked.model";
+import { FirebaseError } from "@angular/fire/app";
 
 
 
 
 type AdminState = {
     artists: Artist[]
-    // artists2024: Artist2024[]
     concerts: Concert[];
     sortedConcerts: any;
     isLoading: boolean;
@@ -31,7 +29,6 @@ type AdminState = {
 const initialState: AdminState = {
 
     artists: [],
-    // artists2024: [],
     concerts: [],
     sortedConcerts: [],
     isLoading: false,
@@ -40,11 +37,6 @@ const initialState: AdminState = {
     selectedArtistId: null,
     visibleWeeksAhead: 12
 }
-
-
-
-
-
 
 export const AdminStore = signalStore(
     { providedIn: 'root' },
@@ -64,35 +56,30 @@ export const AdminStore = signalStore(
             },
             async loadConcerts() {
                 const path = `concerts`;
-                await fs.collection(path).subscribe((rawConcerts: any[]) => {
-                    // console.log(rawConcerts)
-                    const concerts: Concert[] = []
-                    rawConcerts.forEach((rawConcert: any) => {
-                        const concert: Concert = {
-                            id: rawConcert.id,
-                            artistsBooked: rawConcert.artistsBooked,
-                            date: new Date(rawConcert.date.seconds * 1000)
-                        }
-                        concerts.push(concert)
+                await fs.asyncCollection(path)
+                    .then((rawConcerts: any[]) => {
+                        console.log(rawConcerts)
+                        const concerts: Concert[] = []
+                        rawConcerts.forEach((rawConcert: any) => {
+                            const concert: Concert = {
+                                id: rawConcert.id,
+                                artistsBooked: rawConcert.artistsBooked,
+                                date: new Date(rawConcert.date.seconds * 1000)
+                            }
+                            concerts.push(concert)
 
+                        })
+                        patchState(store, { concerts })
                     })
-                    // console.log(concerts)
-                    patchState(store, { concerts })
-                })
+                    .catch((err: FirebaseError) => {
+                        console.error(`failed to load concerts; ${err.message}`);
+                    })
             },
             async loadSortedConcerts(sortedConcerts: any) {
-                // console.log(sortedConcerts)
+
                 patchState(store, { sortedConcerts })
             },
-            // async loadArtists2024() {
-            //     patchState(store, { isLoading: true })
-            //     const path = `artists-2024`
-            //     await fs.collection(path)
-            //         .subscribe((artists2024: Artist2024[]) => {
-            //             patchState(store, { isLoading: false })
-            //             patchState(store, { artists2024 })
-            //         })
-            // },
+
             setConcertThisSunday(concert: Concert) {
                 console.log(concert)
                 const artists: Artist[] = []
@@ -107,8 +94,6 @@ export const AdminStore = signalStore(
                     }
                     patchState(store, { concertThisSunday })
                 })
-
-                // patchState(store, { concertThisSunday: concert })
             },
             setSelectedDateNumber(selectedDateNumber: number) {
                 patchState(store, { selectedDateNumber: selectedDateNumber })

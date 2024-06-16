@@ -7,8 +7,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class CapitalizeNamePipe implements PipeTransform {
 
-    exeptions: string[] = [
-        'van', 'der', 'den', 'de'
+    exceptions: string[] = [
+        'van', 'der', 'den', 'de', 'of', 'the', 'and'
     ]
 
     constructor(private _sanitizer: DomSanitizer) {
@@ -17,7 +17,7 @@ export class CapitalizeNamePipe implements PipeTransform {
     transform(name: string): SafeHtml {
         const words: string[] = name.split(' ')
         words.forEach((word: string, index: number) => {
-            if (!this.exeptions.includes(word)) {
+            if (!this.exceptions.includes(word)) {
                 words[index] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
             }
         });

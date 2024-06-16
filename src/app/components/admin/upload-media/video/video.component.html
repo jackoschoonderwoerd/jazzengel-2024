@@ -1,0 +1,88 @@
+<div class="wrapper">
+    <div class="videos">
+        @for(video of jazzengelVideos();track video.id) {
+        <div class="video">
+            <div class="date">
+                {{video.date.toDate()|date}}
+            </div>
+            <button mat-icon-button
+                (click)="onEditVideo(video)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        }
+    </div>
+
+    <iframe [src]="downloadUrl|safe"
+        frameborder="0"
+        class="preview"></iframe>
+    <form [formGroup]="form">
+
+        <input type="file"
+            #fileInput
+            (change)="onFileInputChange($event)"
+            style="display: none;">
+        <button mat-raised-button
+            (click)="fileInput.click()">select media file</button>
+        <mat-form-field>
+            <mat-label>title</mat-label>
+            <input type="text"
+                matInput
+                formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput
+                formControlName="date"
+                [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix
+                [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+        <form class="artists-form-array"
+            formArrayName="artists">
+            <div *ngFor="let artist of artists().controls; let i=index">
+                <div class="musician"
+                    [formGroupName]="i">
+
+                    <mat-form-field>
+                        <mat-label>{{i}} First Name :</mat-label>
+                        <input matInput
+                            type="text"
+                            formControlName="firstname" />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Last Name:</mat-label>
+                        <input matInput
+                            type="text"
+                            formControlName="lastname" />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>instrument</mat-label>
+                        <input matInput
+                            type="text"
+                            formControlName="instrument" />
+                    </mat-form-field>
+
+                    <mat-icon (click)="removeArtist(i)">delete_forever</mat-icon>
+
+                </div>
+            </div>
+            <button mat-raised-button
+                type="button"
+                color="primary"
+                (click)="addArtist()">Add Artist</button>
+
+        </form>
+
+        <button mat-raised-button
+            [disabled]="formDisabled"
+            (click)="onAddMedia()">{{editmode ? 'update': 'add'}}&nbsp;video</button>
+    </form>
+</div>

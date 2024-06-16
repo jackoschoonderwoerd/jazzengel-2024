@@ -19,6 +19,16 @@ export const routes: Routes = [
             .then(c => c.MonthsComponent)
     },
     {
+        path: 'media',
+        loadComponent: () => import('./components/visitor/media/media.component')
+            .then(c => c.MediaComponent)
+    },
+    {
+        path: 'media-player',
+        loadComponent: () => import('./components/visitor/media/media-player/media-player.component')
+            .then(c => c.MediaPlayerComponent)
+    },
+    {
         path: 'about',
         loadComponent: () => import('./components/visitor/about/about.component')
             .then(c => c.AboutComponent)

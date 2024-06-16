@@ -7,6 +7,8 @@ mat-spinner {
     grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
     gap: 0.3rem;
     .artist {
+        background-color: var(--yellow);
+        color: var(--purple);
         display: flex;
         justify-content: space-between;
         align-items: center;
