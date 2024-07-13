@@ -1,4 +1,4 @@
-export interface ArtistBooked {
+export interface ArtistIdFeatured {
     artistId: string;
     isFeatured: boolean;
 }

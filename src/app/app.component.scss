@@ -20,6 +20,16 @@ mat-sidenav-container {
         main {
             overflow: auto;
             grid-area: main;
+            app-loading-indicator {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 100;
+                background-color: white;
+                opacity: 0.5;
+            }
         }
         app-footer {
             height: 2rem;

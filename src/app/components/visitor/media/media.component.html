@@ -9,7 +9,7 @@
                 <mat-panel-description>
                     <div class="content">
                         @if(video.title) {
-                        {{video.title|capitalizeName}}
+                        {{video.title}}
                         }
                     </div>
 
@@ -20,8 +20,8 @@
                 @for(artist of video.artists; track artist) {
                 <li class="artist">
                     <div class="name">
-                        <div class="firstname">{{artist.firstname|capitalizeName}}</div>
-                        <div class="lastname">{{artist.lastname|capitalizeName}}</div>
+                        <div class="firstname">{{artist.firstname}}</div>
+                        <div class="lastname">{{artist.lastname}}</div>
                     </div>
                     <div class="instrument">{{artist.instrument}}</div>
                 </li>

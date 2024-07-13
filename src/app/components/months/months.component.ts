@@ -16,6 +16,8 @@ import { MonthPipe } from '../../pipes/month.pipe';
 import { DateComponent } from './date/date.component';
 import { ThisSundayComponent } from '../../this-sunday/this-sunday.component';
 import { FirebaseError } from '@angular/fire/app';
+import { AuthStore } from '../../auth/auth.store';
+import { STATE_SIGNAL } from '@ngrx/signals/src/state-signal';
 
 @Component({
     selector: 'app-concerts',
@@ -40,23 +42,13 @@ export class MonthsComponent implements OnInit {
     dates: any
     isExpanded: boolean = false;
     selectedMonthNumber: number = new Date().getMonth();
+    authStore = inject(AuthStore)
 
 
     ngOnInit(): void {
-        this.adminStore.loadConcerts();
-        this.dates = this.calendarService.getCalendar();
-        this.dialog.open(ThisSundayComponent)
 
-        this.fs.asyncCollection(`artists`)
-            .then((data: any) => {
-                console.log(data)
-            })
-            .catch((err: FirebaseError) => {
-                console.error(`failed: ${err.message}`)
-            })
     }
     monthSelected(month) {
-        // const monthNumber = new Date(month.date).getMonth()
         this.selectedMonthNumber = new Date(month.date).getMonth()
     }
 

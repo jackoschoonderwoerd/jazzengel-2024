@@ -49,6 +49,7 @@ export class ArtistComponent implements OnInit {
                 this.id = params.id;
                 const path = `artists/${params.id}`
                 this.fs.getDoc(path).subscribe((artist: Artist) => {
+                    console.log('ARTIST: ', artist)
                     this.artist = artist;
                 })
 
@@ -68,6 +69,9 @@ export class ArtistComponent implements OnInit {
     onEditImage() {
         this.router.navigate(['admin/artist-image', { imageUrl: this.artist.imageUrl, id: this.artist.id }])
     }
+
+
+
     onEditBiography() {
         console.log('edit bio')
         this.router.navigate(['admin/artist-bio', { id: this.artist.id }])

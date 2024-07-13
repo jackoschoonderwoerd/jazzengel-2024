@@ -54,12 +54,14 @@ export class StorageService {
     }
 
     deleteObject(path: string) {
+
         if (path) {
             const storageRef = ref(this.storage, path)
             return deleteObject(storageRef)
         }
         return;
     }
+
     getBlob(pathToBlob: string) {
         const storageRef = ref(this.storage, pathToBlob)
         return getBlob(storageRef)
@@ -68,4 +70,5 @@ export class StorageService {
         const storageRef = ref(this.storage, path)
         return getDownloadURL(storageRef)
     }
+
 }

@@ -26,7 +26,6 @@
                         <mat-icon>keyboard_arrow_up</mat-icon>
                     </button>
                     }
-                    <!-- @if(index != artists.length - 1){ -->
                     <button mat-icon-button
                         [disabled]="index == artists.length - 1"
                         (click)="onMove('down', index)"
@@ -34,7 +33,6 @@
 
                         <mat-icon>keyboard_arrow_down</mat-icon>
                     </button>
-                    <!-- } -->
                 </div>
             </div>
             <div class="right">
@@ -59,7 +57,7 @@
             <mat-label>add artist</mat-label>
             <mat-select formControlName="artist"
                 (selectionChange)="artistSelected()">
-                @for (artist of adminStore.artists(); track artist) {
+                @for (artist of adminStore.artists(); track artist.id) {
                 <mat-option [value]="artist">{{artist.name}}</mat-option>
                 }
             </mat-select>
@@ -68,5 +66,13 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button
-        (click)="onSubmit()">{{editmode ? 'update':'add'}}&nbsp;concert</button>
+        [ngStyle]="{'border': concertChanged ? '3px solid red' : '3px solid transparent'}"
+        (click)="addOrUpdateConcert()">{{editmode ? 'update':'add'}}&nbsp;concert</button>
 </mat-dialog-actions>
+<!-- <pre>
+    <code>
+
+        {{adminStore.artists()|json}}
+    </code>
+</pre> -->
+<!-- 220I8XV6VBgG1CjjlFRe -->

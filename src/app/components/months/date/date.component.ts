@@ -4,8 +4,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { Artist } from '../../../models/artist.model';
 import { FirestoreService } from '../../../services/firestore.service';
 import { take } from 'rxjs';
-import { JsonPipe, NgStyle } from '@angular/common';
-import { ArtistBooked } from '../../../models/artist-booked.model';
+import { AsyncPipe, JsonPipe, NgStyle } from '@angular/common';
+import { ArtistIdFeatured } from '../../../models/artist-id-featured.model';
 import { ArtistBioComponent } from './artist-bio/artist-bio.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddConcertComponent } from './add-concert/add-concert.component';
@@ -14,6 +14,8 @@ import { ThisSundayComponent } from '../../../this-sunday/this-sunday.component'
 import { AdminStore } from '../../admin/admin.store';
 import { Auth } from '@angular/fire/auth';
 import { AuthStore } from '../../../auth/auth.store';
+import { VisitorService } from '../../visitor/visitor.service';
+import { Observable } from 'tinymce';
 
 @Component({
     selector: 'app-date',
@@ -23,7 +25,8 @@ import { AuthStore } from '../../../auth/auth.store';
         JsonPipe,
         ArtistBioComponent,
         NgStyle,
-        CapitalizeNamePipe
+        CapitalizeNamePipe,
+        AsyncPipe
     ],
     templateUrl: './date.component.html',
     styleUrl: './date.component.scss',
@@ -33,6 +36,8 @@ export class DateComponent implements OnInit {
     @Input() public concert!: Concert;
     featuredArtists: Artist[] = [];
     artists: Artist[] = [];
+    // artists: Observable<Artist[]>;
+
     adminStore = inject(AdminStore)
     fs = inject(FirestoreService);
     dialog = inject(MatDialog)
@@ -40,23 +45,20 @@ export class DateComponent implements OnInit {
     selectedDateNumber: number;
     auth = inject(Auth)
     authStore = inject(AuthStore);
+    visitorService = inject(VisitorService)
+
 
 
 
     ngOnInit(): void {
-        // console.log(new Date(this.concert.date).getDate())
-        if (this.concert.artistsBooked.length) {
+
+        if (this.concert.artistsIdFeatured.length) {
             this.updateProgram()
         }
         this.dateIsExpanded()
-        // this.dialog.open(ThisSundayComponent);
-
     }
 
     onDate(e: Event) {
-
-
-
         if (this.authStore.isLoggedIn) {
             console.log(this.concert)
             const dialogRef = this.dialog.open(AddConcertComponent, {
@@ -76,7 +78,6 @@ export class DateComponent implements OnInit {
     onDateSelected(e: Event) {
         e.stopPropagation();
         this.selectedDateNumber = this.concert.date.getDate()
-        console.log(this.selectedDateNumber)
         this.adminStore.setSelectedDateNumber(this.concert.date.getDate());
     }
     dateIsExpanded() {
@@ -90,22 +91,28 @@ export class DateComponent implements OnInit {
         }
     }
 
+
     updateProgram() {
         this.artists = [];
         this.featuredArtists = [];
-        if (this.concert.artistsBooked.length) {
+        if (this.concert.artistsIdFeatured.length) {
             // console.log(this.concert.artistsBooked)
-            this.concert.artistsBooked.forEach((artistBooked: ArtistBooked) => {
-                const path = `artists/${artistBooked.artistId}`
-                this.fs.getDoc(path).pipe(take(1)).subscribe((artist: Artist) => {
-                    this.artists.push(artist)
-                    if (artistBooked.isFeatured) {
-                        this.featuredArtists.push(artist);
-                    }
-                })
-            })
+            this.concert.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
+                this.visitorService.getArtistById((artistBooked.artistId))
+                    .then((artist: Artist) => {
+
+                        // console.log(artist.name)
+                        this.artists.push(artist)
+                        if (artistBooked.isFeatured) {
+                            this.featuredArtists.push(artist);
+                        }
+                    });
+            });
         }
     }
+
+
+
     getHeight() {
         const length = this.featuredArtists.length
         if (length === 1) {

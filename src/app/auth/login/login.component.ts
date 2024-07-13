@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         })
     }
     onSubmit() {
-        console.log(this.form.value)
         const userLogin: UserLogin = this.form.value;
         this.dialogRef.close(userLogin)
     }

@@ -26,24 +26,20 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     templateUrl: './artists.component.html',
     styleUrl: './artists.component.scss'
 })
-export class ArtistsComponent implements OnInit {
-    adminStore = inject(AdminStore);
+export class ArtistsComponent {
+
     dialog = inject(MatDialog);
     router = inject(Router)
     fs = inject(FirestoreService);
-    storage = inject(StorageService)
+    storage = inject(StorageService);
+    adminStore = inject(AdminStore);
 
-    ngOnInit(): void {
-        this.adminStore.loadArtists();
-    }
+
     onAddArtist() {
-
-
         const dialogRef = this.dialog.open(InitArtistComponent)
         dialogRef.afterClosed().subscribe((id) => {
             this.router.navigate(['admin/artist', { id: id }])
         })
-
     }
     onEdit(artist: Artist) {
         this.router.navigate(['admin/artist', {
@@ -62,13 +58,16 @@ export class ArtistsComponent implements OnInit {
                 const path = `artists/${artistId}`
                 this.checkForExistingFile(artistId)
                     .then((imageUrl: string) => {
-                        console.log(imageUrl)
+                        console.log(`file found; ${imageUrl}`)
                     })
                     .catch((err: FirebaseError) => {
-                        console.error(err.message);
+                        console.error(`failed to find file; ${err.message}`);
                     })
                     .then(() => {
                         return this.deleteFileFromStorage(path)
+                    })
+                    .catch((err: FirebaseError) => {
+                        console.error(`failed to delete file ${err.message}`)
                     })
                     .then(() => {
                         return this.fs.deleteDoc(path)

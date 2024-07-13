@@ -1,4 +1,12 @@
 <div class="wrapper">
+    <div class="artist-name">
+        {{artist?.name}}
+    </div>
+    @if(imageFileSize) {
+    <div class="file-size">
+        file size:&nbsp;{{imageFileSize}}
+    </div>
+    }
     @if(!sourceIsFile){
     <img class="old-image image"
         [src]="imageUrl"
@@ -19,6 +27,14 @@
             (click)="fileInput.click()">select image
         </button>
         <button mat-raised-button
-            (click)="onDone()">done</button>
+            [class.image-changed]="imageChanged"
+            (click)="onSave()">save</button>
+
+        <button mat-raised-button><a href="https://redketchup.io/image-resizer/"
+                target="_blank">crop online</a></button>
+        <button mat-raised-button
+            (click)="onDelete()">delete</button>
+        <button mat-raised-button
+            (click)="onCancel()">cancel</button>
     </div>
 </div>

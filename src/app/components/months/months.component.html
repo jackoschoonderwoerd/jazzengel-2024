@@ -3,7 +3,7 @@
 
     <mat-expansion-panel (click)="monthSelected(month[0])"
         class="month"
-        [expanded]="(month[0].date).getMonth()===selectedMonthNumber">
+        [expanded]="(month[0].date).getMonth() === selectedMonthNumber">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{(month[0]).date|month}}

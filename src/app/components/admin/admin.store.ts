@@ -9,7 +9,7 @@ import { take } from "rxjs";
 import { Artist } from "../../models/artist.model";
 import { Concert } from "../../models/concert.model";
 
-import { ArtistBooked } from "../../models/artist-booked.model";
+import { ArtistIdFeatured } from "../../models/artist-id-featured.model";
 import { FirebaseError } from "@angular/fire/app";
 
 
@@ -23,7 +23,7 @@ type AdminState = {
     concertThisSunday: any;
     selectedDateNumber: number;
     selectedArtistId: string;
-    visibleWeeksAhead: number
+    // visibleWeeksAhead: number
 }
 
 const initialState: AdminState = {
@@ -35,7 +35,7 @@ const initialState: AdminState = {
     concertThisSunday: null,
     selectedDateNumber: null,
     selectedArtistId: null,
-    visibleWeeksAhead: 12
+    // visibleWeeksAhead: 12
 }
 
 export const AdminStore = signalStore(
@@ -47,23 +47,25 @@ export const AdminStore = signalStore(
             async loadArtists() {
                 patchState(store, { isLoading: true })
                 const path = `artists`;
-                await fs.collection(path).subscribe((artists: Artist[]) => {
+                await fs.asyncCollection(path).then((artists: Artist[]) => {
 
-                    console.log(artists)
+
+                    // console.log(artists)
                     artists.sort((a: Artist, b: Artist) => a.name.localeCompare(b.name));
-                    patchState(store, { artists, isLoading: false })
+                    patchState(store, { artists: artists });
+                    patchState(store, { isLoading: false });
                 });
             },
             async loadConcerts() {
+                console.log(`loadConcerts()`)
                 const path = `concerts`;
                 await fs.asyncCollection(path)
                     .then((rawConcerts: any[]) => {
-                        console.log(rawConcerts)
                         const concerts: Concert[] = []
                         rawConcerts.forEach((rawConcert: any) => {
                             const concert: Concert = {
                                 id: rawConcert.id,
-                                artistsBooked: rawConcert.artistsBooked,
+                                artistsIdFeatured: rawConcert.artistsBooked,
                                 date: new Date(rawConcert.date.seconds * 1000)
                             }
                             concerts.push(concert)
@@ -74,17 +76,24 @@ export const AdminStore = signalStore(
                     .catch((err: FirebaseError) => {
                         console.error(`failed to load concerts; ${err.message}`);
                     })
-            },
-            async loadSortedConcerts(sortedConcerts: any) {
+                    .then(() => {
 
+                        // console.log(store.concerts())
+                        // console.log(store.artists())
+                    })
+            },
+
+
+
+            async storeSortedConcerts(sortedConcerts: any) {
+                console.log(`storeSortedConcerts()`)
                 patchState(store, { sortedConcerts })
             },
 
             setConcertThisSunday(concert: Concert) {
-                console.log(concert)
                 const artists: Artist[] = []
-                concert.artistsBooked.forEach((artistBooked: ArtistBooked) => {
-                    const path = `artists/${artistBooked.artistId}`
+                concert.artistsIdFeatured.forEach((artistIdFeatured: ArtistIdFeatured) => {
+                    const path = `artists/${artistIdFeatured.artistId}`
                     fs.getDoc(path).pipe(take(1)).subscribe((artist: Artist) => {
                         artists.push(artist)
                     })
@@ -101,11 +110,16 @@ export const AdminStore = signalStore(
             setSelectedArtistId(id: string) {
                 patchState(store, { selectedArtistId: id })
             },
-            setVisibleWeeksAhead(visibleWeeksAhead: number) {
-                console.log(visibleWeeksAhead);
-                patchState(store, { visibleWeeksAhead: visibleWeeksAhead })
+            // setVisibleWeeksAhead(visibleWeeksAhead: number) {
+            //     // console.log(visibleWeeksAhead);
+            //     patchState(store, { visibleWeeksAhead: visibleWeeksAhead })
+            // },
+            setIsLoading(status: boolean) {
+                patchState(store, { isLoading: status })
             }
+
         })
     ),
 );
+
 

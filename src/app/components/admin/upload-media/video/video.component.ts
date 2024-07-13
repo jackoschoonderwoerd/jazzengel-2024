@@ -44,6 +44,7 @@ export class VideoComponent {
     videoUnderConstruction = signal<JazzengelVideo>(null)
 
     ngOnInit(): void {
+        this.downloadUrl = 'https://jazzengel.nl'
         this.initForm();
         const path = `videos`
         this.fs.asyncCollection(path).then((videos: JazzengelVideo[]) => {

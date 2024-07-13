@@ -24,6 +24,7 @@ import {
 } from '@angular/fire/firestore';
 import { firstValueFrom, merge, Observable } from 'rxjs';
 import { Artist } from '../models/artist.model';
+import { Concert } from '../models/concert.model';
 
 @Injectable({
     providedIn: 'root'
@@ -46,9 +47,58 @@ export class FirestoreService {
     }
 
     async asyncCollection(path: string): Promise<any[]> {
-        console.log('asyncCollection()')
         const collectionRef = collection(this.firestore, path)
         return await firstValueFrom(collectionData(collectionRef, { idField: 'id' }))
+    }
+
+    // async asyncCollectionQuery(path: string, minDate: Date, maxDate: Date,): Promise<any> {
+    //     console.log(`asyncCollectionQuery`)
+
+    //     const collectionRef = collection(this.firestore, path)
+    //     const queryRefMin = query(collectionRef, where('date', '>', minDate))
+    //     const queryRefMinMax = query(queryRefMin, where('date', '<', maxDate))
+    //     // firstValueFrom(collectionData(queryRef, { idField: 'id' }))
+    //     return await firstValueFrom(collectionData(queryRefMinMax, { idField: 'id' }))
+    // }
+
+    async asyncCollectionByDateRange(
+        path: string,
+        fieldName: string,
+        startDate: Date,
+        endDate: Date) {
+        const dayBefore = this.getDayBeforeStartDate(startDate)
+        const dayAfter = this.getDayAfterLastDate(endDate)
+        const collectionRef = collection(this.firestore, path)
+        const startQuery = query(collectionRef, where(fieldName, '>', dayBefore))
+        const endQuery = query(startQuery, where(fieldName, '<', dayAfter))
+        return await firstValueFrom(collectionData(endQuery, { idField: 'id' }))
+    }
+    async asyncCollectionByRange(path: string, fieldName: string, min: any, max: any) {
+        console.log(min, max)
+        const collectionRef = collection(this.firestore, path);
+        const queryRef = query(collectionRef, where(fieldName, '>=', min), where(fieldName, '<=', max))
+        return await firstValueFrom(collectionData(queryRef, { idField: 'id' }))
+    }
+
+    async
+
+    private getDayBeforeStartDate(startDate: Date) {
+        return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 1)
+    }
+    private getDayAfterLastDate(endDate: Date) {
+        return new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() + 1)
+    }
+
+    async asyncCollectionQuery(path: string, firstFi: string, value: any): Promise<any> {
+        const today = new Date()
+        const myMaxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+        const collectionRef = collection(this.firestore, path)
+        const queryRef = query(collectionRef, where('date', '>', value))
+        return await firstValueFrom(collectionData(queryRef, { idField: 'id' }));
+        const queryRefMin = query(collectionRef, where('date', '>', today))
+        const queryRefMinMax = query(queryRefMin, where('date', '<', myMaxDate))
+        return await firstValueFrom(collectionData(queryRefMinMax, { idField: 'id' }))
+        // firstValueFrom(collectionData(queryRef, { idField: 'id' }))
     }
 
     sortedCollection(path: string, orderedBy: string, direction: any): Observable<any[]> {
@@ -70,6 +120,7 @@ export class FirestoreService {
         return setDoc(docRef, object)
     }
     getDoc(path: string): Observable<any> {
+        console.log(path);
         const docRef = doc(this.firestore, path)
         return docData(docRef, { idField: 'id' })
     }
@@ -128,4 +179,5 @@ export class FirestoreService {
         const q = query(collectionRef, where(fieldName, '==', value))
         return collectionData(q, { idField: 'id' })
     }
+
 }

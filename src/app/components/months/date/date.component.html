@@ -1,3 +1,5 @@
+ <!-- {{artists}} -->
+
  <mat-accordion>
      <mat-expansion-panel class="date"
          [expanded]="(concert.date.getDate() === adminStore.selectedDateNumber())">
@@ -7,20 +9,22 @@
                  <div class="date"
                      (click)="onDate($event)">{{concert.date.getDate()}}</div>
                  <ul>
-                     @for(artist of featuredArtists;track artist) {
+                     @for(artist of featuredArtists ;track artist.id) {
                      <li>
-                         {{artist.name|capitalizeName}}
+                         {{artist.name}}
                      </li>
                      }
                  </ul>
              </mat-panel-description>
          </mat-expansion-panel-header>
+         @if(concert.id) {
+         <div class="id">{{concert.id}}</div>
+         <div class="date">{{concert.date}}</div>
+         } @else {
+         <div class="no-id">no id</div>
+         }
          @for(artist of artists;track artist){
-
-
          <app-artist-bio [artist]="artist"></app-artist-bio>
-
-
          }
      </mat-expansion-panel>
  </mat-accordion>

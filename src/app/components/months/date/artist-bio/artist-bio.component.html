@@ -6,7 +6,7 @@
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <div class="name">
-                    {{artist.name|capitalizeName}}
+                    {{artist.name}}
                 </div>
                 <div class="instrument">
                     {{artist.instrument}}
@@ -18,13 +18,16 @@
         <mat-tab-group>
             <mat-tab class="image-tab"
                 label="Image">
+                @if(artist.imageUrl && artist.imageUrl !== '') {
                 <div class="image-container">
                     <img [src]="artist.imageUrl">
                 </div>
+                }
             </mat-tab>
             <mat-tab class="biography-tab"
                 label="Biography">
                 <div class="biography"
+                    style="padding:0.5rem; letter-spacing: 1.1px;"
                     [innerHTML]="artist.biography"></div>
             </mat-tab>
 

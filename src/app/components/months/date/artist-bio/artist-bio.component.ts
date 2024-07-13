@@ -35,7 +35,6 @@ export class ArtistBioComponent {
         this.isExpanded = false
     }
     onArtistSelected(event) {
-        console.log(this.artist.id);
         this.adminStore.setSelectedArtistId(this.artist.id)
     }
 }

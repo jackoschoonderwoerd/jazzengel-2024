@@ -7,7 +7,7 @@
 <div class="artists">
     <button mat-raised-button
         (click)="onAddArtist()">add artist</button>
-    @for(artist of adminStore.artists(); track artist){
+    @for(artist of adminStore.artists(); track artist.id){
     <div class="artist">
         <div class="name">{{artist.name}}</div>
         <!-- <div class="id">{{artist.id}}</div> -->

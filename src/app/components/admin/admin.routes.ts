@@ -9,6 +9,11 @@ export const ADMIN_ROUTES: Routes = [
             .then(r => r.STATS_ROUTES)
     },
     {
+        path: 'store',
+        loadComponent: () => import('./store/store.component')
+            .then(c => c.StoreComponent)
+    },
+    {
         path: 'artists',
         loadComponent: () => import('./artists/artists.component')
             .then(c => c.ArtistsComponent)

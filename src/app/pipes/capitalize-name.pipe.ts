@@ -15,14 +15,18 @@ export class CapitalizeNamePipe implements PipeTransform {
     }
 
     transform(name: string): SafeHtml {
-        const words: string[] = name.split(' ')
-        words.forEach((word: string, index: number) => {
-            if (!this.exceptions.includes(word)) {
-                words[index] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-            }
-        });
-        const newName = words.join(' ')
-        return newName;
+        if (name) {
+            console.log(name)
+            const words: string[] = name.split(' ')
+            words.forEach((word: string, index: number) => {
+                if (!this.exceptions.includes(word)) {
+                    words[index] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                }
+            });
+            const newName = words.join(' ')
+            // console.log(newName)
+            return newName;
+        }
     }
 
 }

@@ -1,12 +1,15 @@
 import { Routes } from '@angular/router';
+import { isUserAuhtenticated } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: 'admin',
         loadComponent: () => import('./components/admin/admin.component')
             .then(c => c.AdminComponent),
+        canActivate: [isUserAuhtenticated],
         loadChildren: () => import('./components/admin/admin.routes')
-            .then(r => r.ADMIN_ROUTES)
+            .then(r => r.ADMIN_ROUTES),
+        canActivateChild: [isUserAuhtenticated]
     },
     // {
     //     path: 'program',

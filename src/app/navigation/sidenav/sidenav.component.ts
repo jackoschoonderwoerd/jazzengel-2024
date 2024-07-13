@@ -31,6 +31,7 @@ export class SidenavComponent {
         this.closeSidenav.emit()
     }
     onLogin() {
+        // console.log('onLogin()')
         const dialogRef = this.dialog.open(LoginComponent)
         dialogRef.afterClosed().subscribe((loginData: UserLogin) => {
             this.authStore.login(loginData).then((res: any) => {
@@ -41,6 +42,11 @@ export class SidenavComponent {
     }
     onLogout() {
         this.authStore.logout();
-        this.onCloseSidenav()
+        this.onCloseSidenav();
+    }
+    onStore() {
+        console.log('onStore()')
+        this.router.navigateByUrl('/admin/store');
+        this.onCloseSidenav();
     }
 }

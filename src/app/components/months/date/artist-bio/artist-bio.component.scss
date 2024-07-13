@@ -22,19 +22,7 @@ mat-expansion-panel {
         }
         mat-panel-description {
             height: 5rem !important;
-            // .date {
-            //     width: 1.5rem;
-            //     // border: 2px solid red;
-            //     display: flex;
-            //     justify-content: end;
-            //     margin-right: 1rem;
-            // }
-            // ul {
-            //     li {
-            //         display: flex;
-            //         justify-content: space-between;
-            //     }
-            // }
+
             text-transform: lowercase;
             color: var(--yellow);
             font-size: 1.1rem;
@@ -45,37 +33,13 @@ mat-expansion-panel {
         color: var(--yellow);
         mat-tab {
             display: flex;
-            border: 3px solid red;
             width: 100%;
             color: var(--yellow) !important;
-            // .image-container {
-            //     width: 80%;
-
-            //     img {
-            //         width: 100%;
-            //     }
-            // }
+            .biography {
+                color: white;
+            }
         }
-        // .biography-tab {
-        //     .biography {
-        //     }
-        // }
     }
-
-    // mat-card {
-    //     mat-card-header {
-    //     }
-
-    //     mat-card-content {
-    //         img {
-    //             width: 100%;
-    //         }
-    //     }
-    //     mat-card-actions {
-    //         display: flex;
-    //         justify-content: end;
-    //     }
-    // }
 }
 .mat-expansion-indicator::after {
     color: var(--yellow);

@@ -5,6 +5,9 @@
     <mat-sidenav-content>
         <app-toolbar (sidenavToggle)="sidenav.open()"></app-toolbar>
         <main>
+            @if(adminStore.isLoading()){
+            <app-loading-indicator></app-loading-indicator>
+            }
             <router-outlet></router-outlet>
         </main>
         <!-- <app-footer></app-footer> -->

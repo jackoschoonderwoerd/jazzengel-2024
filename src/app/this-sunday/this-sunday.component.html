@@ -1,12 +1,13 @@
 <div class="wrapper">
-
+    <!-- <div class="artists">{{artists|json}}</div> -->
     <div mat-dialog-title
-        class="date">{{adminStore.concertThisSunday()?.date|date}}</div>
+        class="date">{{closestSunday|date}}</div>
+
     <mat-dialog-content>
         <div class="artists">
-            @for(artist of adminStore.concertThisSunday()?.artists; track artist.id) {
+            @for(artist of artists; track artist.id) {
             <div class="artist">
-                <div class="name">{{artist.name|capitalizeName}}</div>
+                <div class="name">{{artist.name}}</div>
                 <div class="instrument">{{artist.instrument}}</div>
             </div>
             }
@@ -17,5 +18,12 @@
         (click)="onClose()">
         <mat-icon>close</mat-icon>
     </div>
+    <!-- <div class="concert">
+        <pre>
+            <code>
+                {{concert|json}}
+            </code>
+        </pre>
+    </div> -->
 
 </div>

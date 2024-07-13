@@ -7,21 +7,21 @@
             (click)="onCloseSidenav()"
             routerLink="media">media</a>
         <a mat-list-item
-            (click)="onCloseSidenav()"
-            routerLink="about">about</a>
-        @if(authStore.isLoggedIn()) {
-        <a mat-list-item
             routerLink="admin/upload-media"
             (click)="onCloseSidenav()">upload media</a>
         <a mat-list-item
-            routerLink="admin/artists-2024"
-            (click)="onCloseSidenav()">artists-2024</a>
+            (click)="onCloseSidenav()"
+            routerLink="about">about</a>
+        @if(authStore.isLoggedIn()) {
         <a mat-list-item
             routerLink="admin/stats"
             (click)="onCloseSidenav()">stats</a>
         <a mat-list-item
             routerLink="admin/artists"
             (click)="onCloseSidenav()">artists</a>
+        <a mat-list-item
+            routerLink="admin/store"
+            (click)="onCloseSidenav()">store</a>
         }
     </mat-nav-list>
     <div class="buttons">

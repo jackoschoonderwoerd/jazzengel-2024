@@ -6,7 +6,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../../auth/login/login.component';
 import { UserLogin } from '../../models/user-login.model';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { AdminStore } from '../../components/admin/admin.store';
 
 @Component({
     selector: 'app-toolbar',
@@ -15,13 +17,19 @@ import { Router } from '@angular/router';
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        MatListModule,
+        MatIconModule,
+        RouterModule
     ],
     templateUrl: './toolbar.component.html',
     styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
-    authStore = inject(AuthStore)
+    authStore = inject(AuthStore);
+    dialog = inject(MatDialog);
+    router = inject(Router);
+    adminStore = inject(AdminStore)
 
     @Output() sidenavToggle = new EventEmitter<void>
 
@@ -29,6 +37,19 @@ export class ToolbarComponent {
     onMenu() {
         console.log(' menu')
         this.sidenavToggle.emit()
+    }
+    onLogin() {
+        const dialogRef = this.dialog.open(LoginComponent)
+        dialogRef.afterClosed().subscribe((loginData: UserLogin) => {
+            this.authStore.login(loginData).then((res: any) => {
+                this.router.navigateByUrl('program')
+
+            })
+        })
+    }
+    onLogout() {
+        console.log('logging out')
+        this.authStore.logout();
     }
 
 

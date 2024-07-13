@@ -1,7 +1,40 @@
 <mat-toolbar>
-    <img (click)="onMenu()"
-        src="./../../../assets/icons/icon-72x72.png"
-        alt="">
+    <div class="left">
+
+        <img (click)="onMenu()"
+            src="./../../../assets/icons/icon-72x72.png"
+            alt="">
+    </div>
+    <div class="is-loading">loading: {{adminStore.isLoading()}}</div>
+    <div class="right">
+        <div class="links">
+            <a routerLink="program">program</a>
+            <a routerLink="media">media</a>
+            <a routerLink="about">about</a>
+            @if(authStore.isLoggedIn()) {
+            <a routerLink="admin/upload-media">upload media</a>
+            <a routerLink="admin/stats">stats</a>
+            <a routerLink="admin/artists">artists</a>
+            <a routerLink="admin/store">
+                store
+            </a>
+            }
+        </div>
+        <div class="buttons">
+            @if(!authStore.isLoggedIn()){
+            <button mat-icon-button
+                (click)="onLogin()">
+                <mat-icon>login</mat-icon>
+            </button>
+            } @else {
+            <button mat-icon-button
+                (click)="onLogout()">
+                <mat-icon>logout</mat-icon>
+            </button>
+            }
+        </div>
+        <!-- <div class="is-logged-in">{{authStore.isLoggedIn()}}</div> -->
+    </div>
     <!-- <div>
         <button (click)="onMenu()"
             mat-icon-button>

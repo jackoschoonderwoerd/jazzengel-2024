@@ -25,6 +25,7 @@
     "@ngrx/signals": "^17.2.0",
     "@tinymce/tinymce-angular": "^8.0.0",
     "@uploadcare/blocks": "^0.41.1",
+    "ngx-image-cropper": "^8.0.0",
     "rxjs": "~7.8.0",
     "tinymce": "^7.1.1",
     "tslib": "^2.3.0",

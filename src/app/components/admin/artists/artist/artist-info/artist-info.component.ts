@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FirebaseError } from '@angular/fire/app';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DocumentReference } from '@angular/fire/firestore';
+import { capitalizeName } from '../../../helpers/capitalizeName';
+
 
 @Component({
     selector: 'app-artist-info',
@@ -57,9 +59,12 @@ export class ArtistInfoComponent implements OnInit {
         })
     }
     patchForm(artist: Artist) {
-        this.form.patchValue({
-            name: artist.name,
-            instrument: artist.instrument
+        capitalizeName(artist.name).then((capitalizedArtistName: string) => {
+            artist.name = capitalizedArtistName;
+            this.form.patchValue({
+                name: artist.name,
+                instrument: artist.instrument
+            })
         })
     }
     addArtist() {
@@ -86,6 +91,7 @@ export class ArtistInfoComponent implements OnInit {
                     this.router.navigate(['admin/artist', { id: this.id }])
                 })
         } else {
+
             const artist: Artist = {
                 name: formvalue.name,
                 instrument: formvalue.instrument,
