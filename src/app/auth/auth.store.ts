@@ -27,9 +27,13 @@ const AUTH_DATA = 'auth_data'
 
 type AuthState = {
     isLoggedIn: boolean;
+    dateRangeStart: Date;
+    dateRangeEnd: Date;
 }
 const initialState: AuthState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    dateRangeStart: new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).setHours(0, 0, 0, 0)),
+    dateRangeEnd: new Date(new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate()).setHours(0, 0, 0, 0))
 }
 
 export const AuthStore = signalStore(
@@ -42,9 +46,6 @@ export const AuthStore = signalStore(
                 signInWithEmailAndPassword(auth, userLogin.email, userLogin.password)
                     .then((userCredential: UserCredential) => {
                         console.log(userCredential.user.email)
-                        // const minDate = new Date()
-                        // const maxDate = new Date(minDate.getFullYear(), minDate.getMonth() + 10, minDate.getDay())
-                        // calendarService.getCalendar(minDate, maxDate)
                         patchState(store, { isLoggedIn: true });
                     })
                     .catch((err: AuthError) => {
@@ -57,9 +58,6 @@ export const AuthStore = signalStore(
                 auth.signOut().then((res: any) => {
                     console.log('you are succesfully logged out')
                     patchState(store, { isLoggedIn: false })
-                    // const minDate = new Date()
-                    // const maxDate = new Date(minDate.getFullYear(), minDate.getMonth() + 3, minDate.getDay())
-                    // calendarService.getCalendar(minDate, maxDate)
                 })
                     .catch((err: FirebaseError) => {
                         console.error('failed to log out')
@@ -74,3 +72,4 @@ export const AuthStore = signalStore(
         })
     ),
 )
+

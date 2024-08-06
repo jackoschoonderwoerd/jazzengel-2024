@@ -27,10 +27,10 @@ export class MonthPipe implements PipeTransform {
                 return 'June';
                 break;
             case 6:
-                return 'July';
+                return 'July (no jazz)';
                 break;
             case 7:
-                return 'August';
+                return 'August (no jazz)';
                 break;
             case 8:
                 return 'September';

@@ -1,4 +1,4 @@
-@for(month of adminStore.sortedConcerts(); track month ) {
+@for(month of adminStore.sortedConcerts(); let index = $index; track index ) {
 <mat-accordion multi="false">
 
     <mat-expansion-panel (click)="monthSelected(month[0])"
@@ -7,12 +7,16 @@
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{(month[0]).date|month}}
+
             </mat-panel-title>
 
         </mat-expansion-panel-header>
-        @for(concert of month;track concert) {
+        @for(concert of month; let index = $index; track index) {
+
         <app-date [concert]="concert"></app-date>
         }
+
+
     </mat-expansion-panel>
 </mat-accordion>
 }

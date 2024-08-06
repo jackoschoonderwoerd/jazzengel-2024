@@ -2,6 +2,9 @@ mat-expansion-panel {
     background-color: var(--yellow);
     border-bottom: 20px solid var(--purple);
     mat-expansion-panel-header {
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
         mat-panel-title {
             // border: 2px solid red;
             width: 2rem;
@@ -13,24 +16,32 @@ mat-expansion-panel {
         mat-panel-description {
             height: 5rem !important;
             // border: 3px solid red;
-            .date {
-                width: 1.5rem;
-                // border: 2px solid red;
-                display: flex;
-                justify-content: end;
-                margin-right: 1rem;
-            }
-            ul {
-                display: flex;
-                flex-direction: column;
-                li {
-                    display: flex;
-                    justify-content: space-between;
-                }
-            }
             color: var(--purple);
             font-size: 1.1rem;
             letter-spacing: 1.1px;
+            display: flex;
+            justify-content: space-between;
+            .left {
+                display: flex;
+                .date {
+                    width: 1.5rem;
+                    // border: 2px solid red;
+                    display: flex;
+                    justify-content: end;
+                    align-items: center;
+                    margin-right: 1rem;
+                }
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    li {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+            mat-icon {
+            }
         }
     }
 }

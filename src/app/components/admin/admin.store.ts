@@ -7,7 +7,7 @@ import { FirestoreService } from "./../../services/firestore.service";
 import { take } from "rxjs";
 
 import { Artist } from "../../models/artist.model";
-import { Concert } from "../../models/concert.model";
+import { Concert } from '../../models/concert.model';
 
 import { ArtistIdFeatured } from "../../models/artist-id-featured.model";
 import { FirebaseError } from "@angular/fire/app";
@@ -86,7 +86,7 @@ export const AdminStore = signalStore(
 
 
             async storeSortedConcerts(sortedConcerts: any) {
-                console.log(`storeSortedConcerts()`)
+                // console.log(`storeSortedConcerts()`, sortedConcerts)
                 patchState(store, { sortedConcerts })
             },
 

@@ -137,7 +137,11 @@ export class ArtistImageComponent implements OnInit {
                 const dbPathToArtist = `artists/${this.artist.id}`
                 const imageUrl = null;
                 this.updateImageUrl(dbPathToArtist, imageUrl);
-                this.image = null
+                this.image = null;
+                this.router.navigate(['admin/artist', { id: this.id }])
+            })
+            .catch((err: FirebaseError) => {
+                console.log(`failed to delete image`)
             })
     }
     private async deleteImageFile(filePath: string) {

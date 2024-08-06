@@ -1,23 +1,25 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SafePipe } from '../../../../pipes/safe.pipe';
+import { SafePipe } from '../../../../../pipes/safe.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-media-player',
+    selector: 'app-video-player',
     standalone: true,
     imports: [MatButtonModule, SafePipe, MatIconModule, MatProgressSpinner],
-    templateUrl: './media-player.component.html',
-    styleUrl: './media-player.component.scss'
+    templateUrl: './video-player.component.html',
+    styleUrl: './video-player.component.scss'
 })
-export class MediaPlayerComponent implements OnInit {
+export class VideoPlayerComponent implements OnInit {
 
     route = inject(ActivatedRoute)
     router = inject(Router)
     downloadUrl = signal<string>('');
     isLoading = true;
+    @ViewChild('iframe') public iframe: HTMLIFrameElement
+
 
     ngOnInit(): void {
         this.route.params.subscribe((params: any) => {
@@ -27,10 +29,15 @@ export class MediaPlayerComponent implements OnInit {
         })
     }
 
+
     onMediaList() {
         this.router.navigateByUrl('/media')
     }
     stopLoading() {
         this.isLoading = false;
+    }
+    // Define the method to handle the iframe load event
+    onIframeLoad(iframe: HTMLIFrameElement) {
+        console.log('Iframe has loaded.');
     }
 }

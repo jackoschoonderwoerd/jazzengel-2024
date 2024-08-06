@@ -10,7 +10,12 @@
 <!-- } -->
 
 <mat-dialog-content>
-
+    <div class="editmode">{{editmode}}</div>
+    @if(concert.id) {
+    <div class="id">{{concert.id}}</div>
+    } @else {
+    <div class="no-id">no id</div>
+    }
     @if(artists.length){
     <ul class="artists">
         @for(artist of artists;track artist; let index = $index){
@@ -42,7 +47,7 @@
                 </div>
                 <button mat-icon-button
                     color="warn"
-                    (click)="onDelete(index)">
+                    (click)="onDeleteArtist(index)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
@@ -63,16 +68,13 @@
             </mat-select>
         </mat-form-field>
     </form>
+    <div class="buttons">
+        <button mat-raised-button
+            [ngStyle]="{'border': concertChanged ? '3px solid red' : '3px solid transparent'}"
+            (click)="addOrUpdateConcert()">update concert</button>
+        <button mat-raised-button
+            (click)="onDeleteConcert()">delete concert</button>
+        <button mat-raised-button
+            mat-dialog-close>cancel</button>
+    </div>
 </mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-raised-button
-        [ngStyle]="{'border': concertChanged ? '3px solid red' : '3px solid transparent'}"
-        (click)="addOrUpdateConcert()">{{editmode ? 'update':'add'}}&nbsp;concert</button>
-</mat-dialog-actions>
-<!-- <pre>
-    <code>
-
-        {{adminStore.artists()|json}}
-    </code>
-</pre> -->
-<!-- 220I8XV6VBgG1CjjlFRe -->

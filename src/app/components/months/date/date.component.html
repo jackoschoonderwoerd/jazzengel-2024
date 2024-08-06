@@ -3,28 +3,43 @@
  <mat-accordion>
      <mat-expansion-panel class="date"
          [expanded]="(concert.date.getDate() === adminStore.selectedDateNumber())">
-         <mat-expansion-panel-header (click)="onDateSelected($event)"
+         <mat-expansion-panel-header (click)="onDateSelected($event, concert)"
              [style]="getHeight()">
              <mat-panel-description>
-                 <div class="date"
-                     (click)="onDate($event)">{{concert.date.getDate()}}</div>
-                 <ul>
-                     @for(artist of featuredArtists ;track artist.id) {
-                     <li>
-                         {{artist.name}}
-                     </li>
-                     }
-                 </ul>
+                 @if(featuredArtists && featuredArtists.length){
+
+                 <div class="left">
+                     <div class="date"
+                         (click)="onDate($event)">{{concert.date.getDate()}}</div>
+                     <ul>
+                         @for(artist of featuredArtists; track artist.id) {
+                         <li>
+                             {{artist.name}}
+                         </li>
+                         }
+                     </ul>
+                 </div>
+                 }
+                 <!-- @if(concert.id) {
+                 <mat-icon (click)="onDeleteConcert($event, concert.id)">delete</mat-icon>
+                 } -->
              </mat-panel-description>
          </mat-expansion-panel-header>
          @if(concert.id) {
          <div class="id">{{concert.id}}</div>
-         <div class="date">{{concert.date}}</div>
          } @else {
          <div class="no-id">no id</div>
          }
-         @for(artist of artists;track artist){
+         @if(concert.date) {
+         <div class="date">{{concert.date}}</div>
+
+         } @else {
+         <div class="no-date">no date</div>
+         }
+         @if(artists && artists.length) {
+         @for(artist of artists;track artist.id){
          <app-artist-bio [artist]="artist"></app-artist-bio>
+         }
          }
      </mat-expansion-panel>
  </mat-accordion>

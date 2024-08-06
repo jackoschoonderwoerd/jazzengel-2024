@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { isUserAuhtenticated } from './guards/auth.guard';
 
+
 export const routes: Routes = [
     {
         path: 'admin',
@@ -28,8 +29,8 @@ export const routes: Routes = [
     },
     {
         path: 'media-player',
-        loadComponent: () => import('./components/visitor/media/media-player/media-player.component')
-            .then(c => c.MediaPlayerComponent)
+        loadComponent: () => import('./components/visitor/media/video/video-player/video-player.component')
+            .then(c => c.VideoPlayerComponent)
     },
     {
         path: 'about',

@@ -1,49 +1,53 @@
-mat-dialog-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    .artists {
+:host {
+    padding: 3rem;
+    mat-dialog-content {
         display: flex;
         flex-direction: column;
-        gap: 0.2rem;
-
-        .artist {
-            border: 1px solid lightgray;
+        gap: 0.3rem;
+        .artists {
             display: flex;
-            gap: 1rem;
-            justify-content: space-between;
-            align-items: center;
-            .left {
-                // border: 1px solid red;
+            flex-direction: column;
+            gap: 0.2rem;
+
+            .artist {
+                border: 1px solid lightgray;
                 display: flex;
+                gap: 1rem;
                 justify-content: space-between;
-                width: 100%;
                 align-items: center;
-                .name {
-                    margin-left: 0.5rem;
-                }
-                .move {
+                .left {
+                    // border: 1px solid red;
                     display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    align-items: center;
+                    .name {
+                        margin-left: 0.5rem;
+                    }
+                    .move {
+                        display: flex;
+                    }
+                }
+                .right {
+                    display: flex;
+                    align-items: center;
                 }
             }
-            .right {
-                display: flex;
-                align-items: center;
+        }
+        form {
+            width: 100%;
+            mat-form-field {
+                width: 100%;
             }
         }
-    }
-    form {
-        width: 100%;
-        mat-form-field {
-            width: 100%;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid red;
+            button {
+                width: 100%;
+            }
         }
-    }
-}
-mat-dialog-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    button {
-        width: 100%;
     }
 }

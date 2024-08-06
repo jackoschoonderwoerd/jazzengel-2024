@@ -16,6 +16,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 
 
+
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),

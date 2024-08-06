@@ -72,26 +72,26 @@ export class ThisSundayComponent implements OnInit {
     }
 
     getConcertsByDateRange(startDate: Date, endDate: Date) {
-        const promise = new Promise((resolve, reject) => {
-            this.fs.asyncCollectionByDateRange(
-                `concerts`,
-                'date',
-                startDate,
-                endDate
+        // const promise = new Promise((resolve, reject) => {
+        //     this.fs.asyncCollectionByDateRange(
+        //         `concerts`,
+        //         'date',
+        //         startDate,
+        //         endDate
 
-            ).then((rawConcertsArray: any[]) => {
-                // console.log(rawConcertsArray)
-                const concerts: Concert[] = rawConcertsArray.map(rawConcert => {
-                    return {
-                        ...rawConcert,
-                        date: new Date(rawConcert.date.seconds * 1000)
-                    }
-                })
-                // console.log(concerts)
-                resolve(concerts)
-            })
-        })
-        return promise
+        //     ).then((rawConcertsArray: any[]) => {
+        //         // console.log(rawConcertsArray)
+        //         const concerts: Concert[] = rawConcertsArray.map(rawConcert => {
+        //             return {
+        //                 ...rawConcert,
+        //                 date: new Date(rawConcert.date.seconds * 1000)
+        //             }
+        //         })
+        //         // console.log(concerts)
+        //         resolve(concerts)
+        //     })
+        // })
+        // return promise
     }
 
     onClose() {

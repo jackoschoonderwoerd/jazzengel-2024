@@ -1,69 +1,7 @@
-<div class="wrapper">
+<mat-tab-group>
+    <mat-tab label="Photos">Photos</mat-tab>
+    <mat-tab label="Videos">
+        <app-video></app-video>
+    </mat-tab>
 
-    <mat-accordion class="example-headers-align"
-        multi="false">
-        @for(video of videos(); track video.id) {
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{video.date.toDate()|date}} </mat-panel-title>
-                <mat-panel-description>
-                    <div class="content">
-                        @if(video.title) {
-                        {{video.title}}
-                        }
-                    </div>
-
-
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <ul>
-                @for(artist of video.artists; track artist) {
-                <li class="artist">
-                    <div class="name">
-                        <div class="firstname">{{artist.firstname}}</div>
-                        <div class="lastname">{{artist.lastname}}</div>
-                    </div>
-                    <div class="instrument">{{artist.instrument}}</div>
-                </li>
-                }
-            </ul>
-            <div class="button-container">
-                <button mat-icon-button
-                    (click)="onPlayMedia(video.downloadUrl)">
-                    <img src="./../../../../assets/interface/play-button.png"
-                        alt="">
-                    <!-- <mat-icon>music_note</mat-icon> -->
-                </button>
-            </div>
-
-        </mat-expansion-panel>
-        }
-
-    </mat-accordion>
-</div>
-<!-- <iframe [src]="url|safe"
-    frameborder="0">
-</iframe> -->
-
-<!-- <ul class="media-list">
-            @for(media of mediaDatas(); track media.id) {
-            <li class="media"
-                (click)="onPlayMedia(media.downloadUrl)">
-                <div class="header">
-
-                    <div class="title">{{media.title}}</div>
-                </div>
-                <ul class="artists">
-                    @for(artist of media.artists; track artist) {
-                    <li class="artist">
-                        <div class="name">
-                            <div class="firstname">{{artist.firstname}}</div>
-                            <div class="lastname">{{artist.lastname}}</div>
-                        </div>
-                        <div class="instrument">{{artist.instrument}}</div>
-                    </li>
-                    }
-                </ul>
-            </li>
-            }
-        </ul> -->
+</mat-tab-group>

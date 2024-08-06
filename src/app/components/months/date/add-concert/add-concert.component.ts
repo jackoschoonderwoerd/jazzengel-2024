@@ -1,5 +1,5 @@
 import { DatePipe, JsonPipe, NgStyle } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminStore } from '../../../admin/admin.store';
@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from '../../../admin/shared/confirm-dialog/confirm-dialog.component';
 import { take } from 'rxjs';
 import { VisitorService } from '../../../visitor/visitor.service';
+
+import { CalendarService } from '../../../../services/calendar.service';
+import { WarnDialogComponent } from '../../../admin/shared/warn-dialog/warn-dialog.component';
 
 @Component({
     selector: 'app-add-concert',
@@ -46,7 +49,9 @@ export class AddConcertComponent implements OnInit {
     concert!: Concert;
     concertChanged: boolean = false;
     dialog = inject(MatDialog);
-    visitorService = inject(VisitorService)
+    visitorService = inject(VisitorService);
+    calendarService = inject(CalendarService);
+
 
 
     constructor(public dialogRef: MatDialogRef<AddConcertComponent>) { }
@@ -54,29 +59,29 @@ export class AddConcertComponent implements OnInit {
     fs = inject(FirestoreService)
 
     ngOnInit(): void {
-        if (this.data.concert.id) {
-            console.log(this.data.concert.id)
-            this.editmode = true;
-        } else {
-            console.log('no id')
-            this.editmode = false;
-        }
         if (this.data.concert) {
+            console.log(this.data.concert)
             this.concert = this.data.concert;
-            console.log(this.concert)
+            if (this.concert.id) {
+                this.editmode = true;
+            }
+            // console.log(this.concert)
             if (this.concert.artistsIdFeatured.length) {
                 this.artistsIdFeatured = this.concert.artistsIdFeatured;
-                // this.editmode = true;
                 this.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
                     this.visitorService.getArtistById(artistBooked.artistId)
                         .then((artist: Artist) => {
+                            console.log(artist)
                             this.artists.push(artist)
                         })
-                    // const path = `artists/${artistBooked.artistId}`
-                    // this.fs.getDoc(path).pipe(take(1)).subscribe((artist: Artist) => {
-                    // })
                 })
             }
+        } else {
+            this.dialog.open(WarnDialogComponent, {
+                data: {
+                    message: 'no concert available for selected date'
+                }
+            })
         }
         this.initForm()
         // this.adminStore.loadArtists();
@@ -97,22 +102,21 @@ export class AddConcertComponent implements OnInit {
     artistSelected() {
         this.concertChanged = true;
         const artist = this.form.value.artist
-        this.artists.push(this.form.value.artist)
+        this.artists.unshift(this.form.value.artist)
         const ArtistIdFeatured: ArtistIdFeatured = {
             artistId: artist.id,
             isFeatured: false
         }
-        this.artistsIdFeatured.push(ArtistIdFeatured)
+        this.artistsIdFeatured.unshift(ArtistIdFeatured)
         this.form.reset();
 
     }
     onCheckboxChange(event: any, index: number) {
         this.concertChanged = true;
         this.artistsIdFeatured[index].isFeatured = event.checked;
-        console.log(this.artistsIdFeatured)
     }
 
-    onDelete(index: number) {
+    onDeleteArtist(index: number) {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             data: {
                 message: 'This will remove the selected artist from the date'
@@ -129,36 +133,65 @@ export class AddConcertComponent implements OnInit {
     }
 
     addOrUpdateConcert() {
-        const concert: Concert = {
-            date: this.concert.date,
-            timestamp: new Date(this.concert.date).setHours(0, 0, 0, 0),
-            artistsIdFeatured: this.artistsIdFeatured
-        }
-        console.log(concert)
-        if (!this.editmode) {
-            const path = `concerts-2024`
-            this.fs.addDoc(path, concert)
-                .then((docRef: DocumentReference) => {
-                    console.log(`concert booked; ${docRef.id}`)
-                    this.dialogRef.close();
-                })
-                .catch((err: FirebaseError) => {
-                    console.error(err.message)
-                })
+        if (this.concert.id) {
+            const updatedConcert: Concert = {
+                id: this.concert.id,
+                date: this.concert.date,
+                timestamp: new Date(this.concert.date).setHours(0, 0, 0, 0),
+                artistsIdFeatured: this.artistsIdFeatured
+            }
+            this.dialogRef.close(updatedConcert);
 
+            // this.updateConcert(updatedConcert)
+            //     .then((res: any) => {
+            //         console.log(res);
+            //         // this.calendarService.getCalendar(0, 3);
+
+            //     })
+            //     .catch((err: FirebaseError) => {
+            //         console.error(err.message)
+            //     })
         } else {
-            const path = `concerts-2024/${this.concert.id}`
-            console.log(path);
-            this.fs.updateDoc(path, { artistsIdFeatured: this.artistsIdFeatured })
-                .then((res: any) => {
-                    console.log(`document updated`);
-                    this.dialogRef.close();
-                })
-                .catch((err: FirebaseError) => {
-                    console.log(`failed to update document; ${err.message}`)
-                })
+            const newConcert: Concert = {
+                date: this.concert.date,
+                timestamp: new Date(this.concert.date).setHours(0, 0, 0, 0),
+                artistsIdFeatured: this.artistsIdFeatured
+            }
+            this.dialogRef.close(newConcert)
+            // this.addConcert(newConcert)
+            //     .then((docRef: DocumentReference) => {
+            //         console.log(docRef.id);
+            //     })
+            //     .catch((err: FirebaseError) => {
+            //         console.error(err.message)
+            //     })
         }
+        this.form.reset()
+        // this.concert = null;
+        this.artists = [];
+        this.artistsIdFeatured = [];
+    }
+    onDeleteConcert() {
+        this.dialogRef.close()
+        console.log(this.concert.id)
+        const path = `concerts-2024/${this.concert.id}`
+        this.fs.deleteDoc(path)
+            .then((res: any) => {
+                console.log(res);
+                this.dialogRef.close();
+            })
+            .catch((err: FirebaseError) => {
+                console.log(err.message)
+            })
+    }
 
+    updateConcert(updatedConcert: Concert) {
+        const path = `concerts-2024/${updatedConcert.id}`
+        return this.fs.updateDoc(path, updatedConcert)
+    }
+    addConcert(newConcert: Concert) {
+        const path = `concerts-2024`
+        return this.fs.addDoc(path, newConcert)
     }
 
     onMove(direction: string, index: number) {

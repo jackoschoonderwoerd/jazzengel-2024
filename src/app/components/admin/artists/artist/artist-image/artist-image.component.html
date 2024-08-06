@@ -11,12 +11,20 @@
     <img class="old-image image"
         [src]="imageUrl"
         alt="">
+    } @else {
+    <div class="no-imageUrl">no imageUrl</div>
     }
     @if(sourceIsFile){
     <img class="new-image image"
         [src]="image"
         alt="">
     }
+    <!-- @else { -->
+    <!-- <div class="no-image">no image</div>
+    } -->
+    <!-- @if(!image && !imageUrl) { -->
+    <!-- <div class="no-image"> </div> -->
+    <!-- } -->
 
     <input type="file"
         #fileInput

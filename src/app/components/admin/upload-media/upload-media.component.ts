@@ -14,7 +14,7 @@ import { SafePipe } from '../../../pipes/safe.pipe';
 import { ArtistForMedia } from '../../../models/artist-for-media';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { VideoComponent } from './video/video.component';
+import { UploadVideoComponent } from './upload-video/upload-video.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -35,7 +35,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
         // MatIconModule,
         // SafePipe,
         // MatDatepickerModule,
-        VideoComponent,
+        UploadVideoComponent,
         MatToolbarModule,
         RouterOutlet,
         RouterLink

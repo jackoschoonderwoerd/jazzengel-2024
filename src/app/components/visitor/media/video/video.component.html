@@ -1,0 +1,84 @@
+<div class="wrapper">
+
+    <mat-accordion class="example-headers-align"
+        multi="false">
+        @for(artist of sortedVideoArtists(); track artist) {
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title (click)="onArtist(artist.videoIds)">{{artist.name}}</mat-panel-title>
+                <!-- <mat-panel-description>
+                    <div class="content">
+                        @if(video.title) {
+                        {{video.title}}
+                        }
+                    </div>
+
+
+                </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <ul class="video_list">
+                @for(video of activeVideos(); track videoId) {
+                <li class="video_list_item">
+                    <div class="content">
+                        <div class="date">{{video.date.seconds*1000|date}}</div>
+
+                        @if(video.title) {
+                        <div class="title">{{video.title}}</div>
+                        }
+                    </div>
+                    <button mat-icon-button
+                        (click)="onPlayMedia(video.downloadUrl)">
+                        <mat-icon>play_circle_outline</mat-icon>
+                        <!-- <img src="./../../../../assets/interface/play-button.png" -->
+                        <!-- alt=""> -->
+                    </button>
+                </li>
+                }
+            </ul>
+
+
+        </mat-expansion-panel>
+        }
+
+    </mat-accordion>
+
+    <!-- <mat-accordion class="example-headers-align"
+        multi="false">
+        @for(video of videos(); track video.id) {
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{video.date.toDate()|date}} </mat-panel-title>
+                <mat-panel-description>
+                    <div class="content">
+                        @if(video.title) {
+                        {{video.title}}
+                        }
+                    </div>
+
+
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+                @for(artist of video.artists; track artist) {
+                <li class="artist">
+                    <div class="name">
+                        <div class="firstname">{{artist.name}}</div>
+                    </div>
+                    <div class="instrument">{{artist.instrument}}</div>
+                </li>
+                }
+            </ul>
+            <div class="button-container">
+                <button mat-icon-button
+                    (click)="onPlayMedia(video.downloadUrl)">
+                    <img src="./../../../../assets/interface/play-button.png"
+                        alt="">
+
+                </button>
+            </div>
+
+        </mat-expansion-panel>
+        }
+
+    </mat-accordion> -->
+</div>

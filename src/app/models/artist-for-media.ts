@@ -1,5 +1,4 @@
 export type ArtistForMedia = {
-    firstname: string;
-    lastname: string;
+    name: string;
     instrument: string;
 }

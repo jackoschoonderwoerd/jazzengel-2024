@@ -22,7 +22,7 @@ import {
     updateDoc,
     where,
 } from '@angular/fire/firestore';
-import { firstValueFrom, merge, Observable } from 'rxjs';
+import { firstValueFrom, merge, Observable, take } from 'rxjs';
 import { Artist } from '../models/artist.model';
 import { Concert } from '../models/concert.model';
 
@@ -61,33 +61,64 @@ export class FirestoreService {
     //     return await firstValueFrom(collectionData(queryRefMinMax, { idField: 'id' }))
     // }
 
-    async asyncCollectionByDateRange(
+    getCollectionWithinRange(
         path: string,
         fieldName: string,
-        startDate: Date,
-        endDate: Date) {
-        const dayBefore = this.getDayBeforeStartDate(startDate)
-        const dayAfter = this.getDayAfterLastDate(endDate)
-        const collectionRef = collection(this.firestore, path)
-        const startQuery = query(collectionRef, where(fieldName, '>', dayBefore))
-        const endQuery = query(startQuery, where(fieldName, '<', dayAfter))
-        return await firstValueFrom(collectionData(endQuery, { idField: 'id' }))
-    }
-    async asyncCollectionByRange(path: string, fieldName: string, min: any, max: any) {
-        console.log(min, max)
+        min: any,
+        max: any): Observable<(DocumentData | (DocumentData & { id: string; }))[]> {
+        // console.log(min, max)
         const collectionRef = collection(this.firestore, path);
         const queryRef = query(collectionRef, where(fieldName, '>=', min), where(fieldName, '<=', max))
-        return await firstValueFrom(collectionData(queryRef, { idField: 'id' }))
+        // collectionData(queryRef).pipe(take(1)).subscribe(data => console.log(data))
+        firstValueFrom(collectionData(queryRef, { idField: 'id' }))
+        return collectionData(queryRef, { idField: 'id' })
+
     }
 
-    async
+    // async asyncCollectionByDateRange(
+    //     path: string,
+    //     fieldName: string,
+    //     startDate: Date,
+    //     endDate: Date): Promise<(DocumentData | (DocumentData & { id: string; }))[]> {
 
-    private getDayBeforeStartDate(startDate: Date) {
-        return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 1)
-    }
-    private getDayAfterLastDate(endDate: Date) {
-        return new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() + 1)
-    }
+    //     const dayBefore = this.getDayBeforeStartDate(startDate)
+    //     const dayAfter = this.getDayAfterLastDate(endDate)
+    //     const collectionRef = collection(this.firestore, path)
+    //     const startQuery = query(collectionRef, where(fieldName, '>', dayBefore))
+    //     const endQuery = query(startQuery, where(fieldName, '<', dayAfter))
+
+
+    //     return await firstValueFrom(collectionData(endQuery, { idField: 'id' }))
+    // }
+
+    // async asyncCollectionByRange(
+    //     path: string,
+    //     fieldName: string,
+    //     min: any,
+    //     max: any) {
+    //     // console.log(min, max)
+    //     const collectionRef = collection(this.firestore, path);
+    //     const queryRef = query(collectionRef, where(fieldName, '>=', min), where(fieldName, '<=', max))
+    //     // collectionData(queryRef).pipe(take(1)).subscribe(data => console.log(data))
+    //     return await firstValueFrom(collectionData(queryRef, { idField: 'id' }))
+    // }
+
+    // asyncCollectionByRange(path: string, fieldName: string, min: any, max: any) {
+    //     console.log(min, max)
+    //     const collectionRef = collection(this.firestore, path);
+    //     const queryRef = query(collectionRef, where(fieldName, '>=', min), where(fieldName, '<=', max))
+    //     collectionData(queryRef).subscribe(data => console.log(data))
+    //     return collectionData(queryRef, { idField: 'id' })
+    // }
+
+
+
+    // private getDayBeforeStartDate(startDate: Date) {
+    //     return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 1)
+    // }
+    // private getDayAfterLastDate(endDate: Date) {
+    //     return new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() + 1)
+    // }
 
     async asyncCollectionQuery(path: string, firstFi: string, value: any): Promise<any> {
         const today = new Date()

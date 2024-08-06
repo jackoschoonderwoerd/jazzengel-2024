@@ -44,29 +44,22 @@ export class AppComponent implements OnInit {
     calendarService = inject(CalendarService)
 
     ngOnInit(): void {
-        // this.adminStore.loadConcerts();
-        // console.log(this.adminStore.artists());
+
         this.adminStore.loadArtists();
         this.visitorService.getArtists();
         onAuthStateChanged(this.afAuth, (user: FirebaseUser | null) => {
             console.log(`onAuthStateChanged()`)
-            // const today = new Date('4/1/2024')
-            // console.log(today)
-            const today: Date = new Date(new Date().setHours(0, 0, 0, 0))
+            // const today: Date = new Date(new Date().setHours(0, 0, 0, 0))
             if (user) {
                 this.calendarService.getCalendar(0, 10)
-                let maxDate = new Date(today.getFullYear(), today.getMonth() + 10, today.getDay())
-                maxDate = new Date(maxDate.setHours(0, 0, 0, 0))
-
-                // this.calendarService.getCalendar(today, maxDate)
                 this.auStore.persistLogin(user);
-                // this.adminStore.setVisibleWeeksAhead(50)
+
 
             } else {
                 this.calendarService.getCalendar(0, 3)
-                this.dialog.open(ThisSundayComponent)
-                let maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDay())
-                maxDate = new Date(maxDate.setHours(0, 0, 0, 0))
+                // this.dialog.open(ThisSundayComponent)
+                // let maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDay())
+                // maxDate = new Date(maxDate.setHours(0, 0, 0, 0))
 
                 // this.calendarService.getCalendar(today, maxDate)
                 console.log('no user')

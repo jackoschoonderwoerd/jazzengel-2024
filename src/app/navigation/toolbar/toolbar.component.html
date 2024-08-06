@@ -11,14 +11,15 @@
             <a routerLink="program">program</a>
             <a routerLink="media">media</a>
             <a routerLink="about">about</a>
-            @if(authStore.isLoggedIn()) {
+            <div class="devider">|</div>
+            <!-- @if(authStore.isLoggedIn()) { -->
             <a routerLink="admin/upload-media">upload media</a>
             <a routerLink="admin/stats">stats</a>
             <a routerLink="admin/artists">artists</a>
             <a routerLink="admin/store">
                 store
             </a>
-            }
+            <!-- } -->
         </div>
         <div class="buttons">
             @if(!authStore.isLoggedIn()){

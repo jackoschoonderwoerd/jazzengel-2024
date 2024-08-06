@@ -5,6 +5,13 @@
             <div class="date">
                 {{video.date.toDate()|date}}
             </div>
+            <!-- <div class="video">
+                <code>
+                    <pre>
+                        {{video|json}}
+                    </pre>
+                </code>
+            </div> -->
             <button mat-icon-button
                 (click)="onEditVideo(video)">
                 <mat-icon>edit</mat-icon>
@@ -47,23 +54,18 @@
 
         <form class="artists-form-array"
             formArrayName="artists">
-            <div *ngFor="let artist of artists().controls; let i=index">
-                <div class="musician"
+            <div *ngFor="let artist of artists().controls; let i=index"
+                class="artists">
+                <div class="artist"
                     [formGroupName]="i">
 
                     <mat-form-field>
-                        <mat-label>{{i}} First Name :</mat-label>
+                        <mat-label>{{i}} Name :</mat-label>
                         <input matInput
                             type="text"
-                            formControlName="firstname" />
+                            formControlName="name" />
                     </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>Last Name:</mat-label>
-                        <input matInput
-                            type="text"
-                            formControlName="lastname" />
-                    </mat-form-field>
 
                     <mat-form-field>
                         <mat-label>instrument</mat-label>
@@ -82,9 +84,12 @@
                 (click)="addArtist()">Add Artist</button>
 
         </form>
-
-        <button mat-raised-button
-            [disabled]="formDisabled"
-            (click)="onAddMedia()">{{editmode ? 'update': 'add'}}&nbsp;video</button>
+        <div class="buttons">
+            <button mat-raised-button
+                [disabled]="formDisabled"
+                (click)="onAddMedia()">{{editmode ? 'update': 'add'}}&nbsp;video</button>
+            <button mat-raised-button
+                (click)="onCancel()">cancel</button>
+        </div>
     </form>
 </div>

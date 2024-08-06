@@ -7,12 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { FirebaseError } from '@angular/fire/app';
 import { JazzengelVideo } from '../../../../models/jazzengel-video';
-import { DatePipe, NgFor } from '@angular/common';
+import { DatePipe, JsonPipe, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { SafePipe } from '../../../../pipes/safe.pipe';
 import { ArtistForMedia } from '../../../../models/artist-for-media';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-video',
@@ -26,38 +27,46 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatIconModule,
         SafePipe,
         DatePipe,
+        JsonPipe,
         MatDatepickerModule],
-    templateUrl: './video.component.html',
-    styleUrl: './video.component.scss'
+    templateUrl: './upload-video.component.html',
+    styleUrl: './upload-video.component.scss'
 })
-export class VideoComponent {
+export class UploadVideoComponent {
     formDisabled = false;
     storage = inject(StorageService);
     fs = inject(FirestoreService)
     fb = inject(FormBuilder)
+    router = inject(Router)
     form: FormGroup;
     file: File;
-    downloadUrl: string;
+    downloadUrl: string = '';
     fileLocation: string;
     jazzengelVideos = signal<JazzengelVideo[]>(null)
     editmode: boolean = false;
     videoUnderConstruction = signal<JazzengelVideo>(null)
 
     ngOnInit(): void {
-        this.downloadUrl = 'https://jazzengel.nl'
+        // this.downloadUrl = 'https://jazzengel.nl'
+        // this.downloadUrl = 'localhost:4200'
         this.initForm();
         const path = `videos`
-        this.fs.asyncCollection(path).then((videos: JazzengelVideo[]) => {
+        this.fs.collection(path).subscribe((videos: JazzengelVideo[]) => {
+            console.log(videos);
             this.jazzengelVideos.set(videos)
         })
     }
     onEditVideo(video: JazzengelVideo) {
+        this.clearAll();
+
+        console.log(video)
         this.editmode = true;
         this.videoUnderConstruction.set(video)
+        // console.log(this.videoUnderConstruction())
         this.downloadUrl = video.downloadUrl
         this.form.patchValue({
             title: video.title,
-            date: video.date,
+            date: new Date(video.date['seconds'] * 1000),
         })
         this.patchArtists(video.artists)
     }
@@ -84,10 +93,14 @@ export class VideoComponent {
     removeArtist(empIndex: number) {
         this.artists().removeAt(empIndex);
     }
+    private clearArtistsFormArray() {
+        while (this.artists().length !== 0) {
+            this.artists().removeAt(0)
+        }
+    }
     newArtist(): FormGroup {
         return this.fb.group({
-            firstname: '',
-            lastname: '',
+            name: '',
             instrument: '',
             // instruments: this.fb.array([])
         });
@@ -116,7 +129,7 @@ export class VideoComponent {
 
         console.log(artists)
 
-        artists = artists.sort((a, b) => a.lastname.localeCompare(b.lastname))
+        artists = artists.sort((a, b) => a.name.localeCompare(b.name))
 
         const mediaFileProperties: JazzengelVideo = {
             downloadUrl: this.downloadUrl,
@@ -133,6 +146,7 @@ export class VideoComponent {
                 .then((docRef: DocumentReference) => {
                     console.log(docRef.id)
                     this.clearAll();
+                    this.downloadUrl = 'localhost:4200';
                 })
                 .catch((err: FirebaseError) => {
                     console.error(err.message)
@@ -140,7 +154,14 @@ export class VideoComponent {
         } else {
             this.updateJazzengelVideo(mediaFileProperties)
                 .then((res: any) => {
-                    console.log(res)
+                    console.log(res);
+                    // (this.form.get('artists') as FormArray).controls = []
+                    console.log(this.artists().length);
+                    // while (this.artists().length !== 0) {
+                    //     this.artists().removeAt(0)
+                    // }
+                    this.clearArtistsFormArray();
+                    this.downloadUrl = 'localhost:4200'
                     this.clearAll();
 
                 })
@@ -167,9 +188,13 @@ export class VideoComponent {
 
     clearAll() {
         this.form.reset();
+        this.clearArtistsFormArray();
         this.downloadUrl = null;
-        this.videoUnderConstruction = null;
+        this.videoUnderConstruction.set(null);
         this.file = null;
         this.editmode = false;
+    }
+    onCancel() {
+        this.router.navigateByUrl('/admin/upload-media')
     }
 }
