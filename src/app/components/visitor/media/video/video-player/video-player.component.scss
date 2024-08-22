@@ -1,6 +1,8 @@
 .wrapper {
     // border: 3px solid var(--yellow);
     width: 100%;
+    display: flex;
+    flex-direction: column;
     .spinner-container {
         // background-color: var(--yellow);
         padding: 3rem;
@@ -10,16 +12,35 @@
         }
     }
     iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        // width: 100%;
+        // height: 100%;
     }
     button {
         position: absolute;
         bottom: 1rem;
         right: 1rem;
         background-color: var(--yellow);
+    }
+    .artists {
+        width: 100%;
+        max-width: 370px;
+        padding: 1rem;
+        margin: auto;
+        // border: 1px solid white;
+        .artist {
+            display: flex;
+            padding-bottom: 0.5rem;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--yellow);
+            .name {
+                color: var(--yellow);
+            }
+            .instrument {
+                color: var(--yellow);
+            }
+        }
     }
 }

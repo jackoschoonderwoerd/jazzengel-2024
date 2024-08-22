@@ -18,7 +18,8 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-video',
     standalone: true,
-    imports: [MatButtonModule,
+    imports: [
+        MatButtonModule,
         ReactiveFormsModule,
         MatInputModule,
         MatLabel,
@@ -58,7 +59,6 @@ export class UploadVideoComponent {
     }
     onEditVideo(video: JazzengelVideo) {
         this.clearAll();
-
         console.log(video)
         this.editmode = true;
         this.videoUnderConstruction.set(video)

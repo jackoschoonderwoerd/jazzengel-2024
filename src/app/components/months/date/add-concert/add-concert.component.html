@@ -1,21 +1,14 @@
-<!-- @if(data) {
-<pre>
-        <code>
-            {{data|json}}
-        </code>
-    </pre> -->
-
 <div class="title"
     mat-dialog-title>{{data.concert.date|date}}</div>
 <!-- } -->
 
 <mat-dialog-content>
-    <div class="editmode">{{editmode}}</div>
+    <!-- <div class="editmode">{{editmode}}</div>
     @if(concert.id) {
     <div class="id">{{concert.id}}</div>
     } @else {
     <div class="no-id">no id</div>
-    }
+    } -->
     @if(artists.length){
     <ul class="artists">
         @for(artist of artists;track artist; let index = $index){
@@ -70,11 +63,14 @@
     </form>
     <div class="buttons">
         <button mat-raised-button
+            color="primary"
             [ngStyle]="{'border': concertChanged ? '3px solid red' : '3px solid transparent'}"
             (click)="addOrUpdateConcert()">update concert</button>
         <button mat-raised-button
+            color="primary"
             (click)="onDeleteConcert()">delete concert</button>
         <button mat-raised-button
+            color="primary"
             mat-dialog-close>cancel</button>
     </div>
 </mat-dialog-content>

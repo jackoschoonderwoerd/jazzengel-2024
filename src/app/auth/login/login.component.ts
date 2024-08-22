@@ -40,6 +40,6 @@ export class LoginComponent implements OnInit {
         this.dialogRef.close(userLogin)
     }
     onCancel() {
-
+        this.dialogRef.close();
     }
 }

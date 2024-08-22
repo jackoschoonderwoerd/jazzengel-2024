@@ -4,6 +4,11 @@
 @import "./styles/mixins";
 @import "./styles/engelbewaarder-bis";
 
+* {
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 1.7px;
+}
+
 html,
 body {
     height: 100%;
@@ -14,6 +19,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.component {
+    padding: 1rem;
 }
 
 ul {
@@ -56,6 +64,9 @@ div.mat-expansion-panel-body {
 
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover {
     background: pink !important;
+}
+button {
+    text-transform: uppercase;
 }
 
 // ========== uploadcare ==========

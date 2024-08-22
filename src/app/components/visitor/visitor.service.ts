@@ -20,7 +20,7 @@ export class VisitorService {
         const path = `artists`
         this.fs.asyncCollection(path)
             .then((artists: Artist[]) => {
-                console.log(artists)
+                // console.log(artists)
                 this.artists = artists
                 this.adminStore.setIsLoading(false)
             })

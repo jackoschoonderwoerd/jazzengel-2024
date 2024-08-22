@@ -5,8 +5,9 @@
          [expanded]="(concert.date.getDate() === adminStore.selectedDateNumber())">
          <mat-expansion-panel-header (click)="onDateSelected($event, concert)"
              [style]="getHeight()">
+
              <mat-panel-description>
-                 @if(featuredArtists && featuredArtists.length){
+                 <!-- @if(featuredArtists && featuredArtists.length){ -->
 
                  <div class="left">
                      <div class="date"
@@ -19,13 +20,10 @@
                          }
                      </ul>
                  </div>
-                 }
-                 <!-- @if(concert.id) {
-                 <mat-icon (click)="onDeleteConcert($event, concert.id)">delete</mat-icon>
-                 } -->
+                 <!-- } -->
              </mat-panel-description>
          </mat-expansion-panel-header>
-         @if(concert.id) {
+         <!-- @if(concert.id) {
          <div class="id">{{concert.id}}</div>
          } @else {
          <div class="no-id">no id</div>
@@ -35,7 +33,7 @@
 
          } @else {
          <div class="no-date">no date</div>
-         }
+         } -->
          @if(artists && artists.length) {
          @for(artist of artists;track artist.id){
          <app-artist-bio [artist]="artist"></app-artist-bio>

@@ -1,5 +1,5 @@
 @for(month of adminStore.sortedConcerts(); let index = $index; track index ) {
-<mat-accordion multi="false">
+<mat-accordion hideToggle="true">
 
     <mat-expansion-panel (click)="monthSelected(month[0])"
         class="month"

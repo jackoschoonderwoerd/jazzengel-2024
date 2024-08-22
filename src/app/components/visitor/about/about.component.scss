@@ -1,0 +1,23 @@
+.component {
+    color: var(--yellow);
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        .flags {
+            display: flex;
+            gap: 1rem;
+            .flag {
+                width: 3rem;
+                height: 2rem;
+            }
+        }
+    }
+}
+.languageSelected {
+    border: 3px solid var(--yellow);
+}
+.languageIdle {
+    border: 3px solid transparent;
+}

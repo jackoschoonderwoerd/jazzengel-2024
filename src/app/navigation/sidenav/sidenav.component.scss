@@ -1,12 +1,25 @@
 .container {
+    background-color: var(--purple);
+
     height: 100%;
-    border: 1px solid red;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    mat-nav-list {
+    .nav-list {
+        padding: 1rem;
         width: 80vw;
         max-width: 15rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        a {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            color: var(--yellow);
+        }
+        .nav-link {
+        }
     }
     .buttons {
         display: flex;

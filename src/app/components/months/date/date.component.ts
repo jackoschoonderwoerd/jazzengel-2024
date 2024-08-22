@@ -60,7 +60,7 @@ export class DateComponent implements OnInit {
 
 
     ngOnInit(): void {
-        console.log(this.concert)
+        // console.log(this.concert)
         if (this.concert.artistsIdFeatured.length) {
             this.updateProgram()
         }
@@ -69,60 +69,51 @@ export class DateComponent implements OnInit {
 
     onDate(e: Event) {
 
-        e.stopPropagation();
-        const dialogRef = this.dialog.open(AddConcertComponent, {
-            data: { concert: this.concert },
-            width: '40rem',
-            maxWidth: '60rem'
-        })
-        dialogRef.afterClosed().subscribe((concert: Concert) => {
-            // console.log(concert);
-            if (concert && concert.id) {
-                this.updateConcert(concert)
-                    .then((res: any) => {
-                        console.log(`concert updated: ${res} `)
-                        this.updateLocal(concert);
-                    })
-                    .catch((err: FirebaseError) => {
-                        console.error(`failed to update concert: ${err.message}`)
-                    })
-            } else if (concert && !concert.id) {
-                this.addConcert(concert)
-                    .then((docRef: DocumentReference) => {
-                        console.log(`concert added: ${docRef.id} `)
-                        this.concert.id = docRef.id;
-                        this.updateLocal(concert);
-                    })
-                    .catch((err: FirebaseError) => {
-                        console.error(`failed to update concert: ${err.message}`)
-                    })
-            }
-        })
+        if (this.authStore.isLoggedIn()) {
+            e.stopPropagation();
+
+            const dialogRef = this.dialog.open(AddConcertComponent, {
+                data: { concert: this.concert },
+                width: '40rem',
+                maxWidth: '60rem'
+            })
+            dialogRef.afterClosed().subscribe((concert: Concert) => {
+                // console.log(concert);
+                if (concert && concert.id) {
+                    this.updateConcert(concert)
+                        .then((res: any) => {
+                            console.log(`concert updated: ${res} `)
+                            this.updateLocal(concert);
+                        })
+                        .catch((err: FirebaseError) => {
+                            console.error(`failed to update concert: ${err.message}`)
+                        })
+                } else if (concert && !concert.id) {
+                    this.addConcert(concert)
+                        .then((docRef: DocumentReference) => {
+                            console.log(`concert added: ${docRef.id} `)
+                            this.concert.id = docRef.id;
+                            this.updateLocal(concert);
+                        })
+                        .catch((err: FirebaseError) => {
+                            console.error(`failed to update concert: ${err.message}`)
+                        })
+                }
+            })
+        }
     }
 
 
     private updateConcert(concert: Concert) {
         const path = `concerts-2024/${concert.id}`
         return this.fs.setDoc(path, concert)
-        // .then((res: any) => {
-        //     console.log(res)
-        //     // this.calendarService.getCalendar()
-        // })
-        // .catch((err: FirebaseError) => {
-        //     console.error(err.message)
-        // })
+
 
     }
     private addConcert(concert: Concert) {
         const path = `concerts-2024`
         return this.fs.addDoc(path, concert)
-        // .then((res: any) => {
-        //     console.log(res)
-        //     // this.calendarService.getCalendar()
-        // })
-        // .catch((err: FirebaseError) => {
-        //     console.error(err.message)
-        // })
+
     }
 
     onDateSelected(e: Event, concert: Concert) {
@@ -144,21 +135,18 @@ export class DateComponent implements OnInit {
 
 
     updateProgram() {
-        // console.log(`updateProgram()`)
         this.artists = [];
         this.featuredArtists = [];
         if (this.concert.artistsIdFeatured.length) {
-            // console.log(`if block`)
-            // console.log(this.concert.artistsBooked)
             this.concert.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
+                console.log('updateProgram START: ', artistBooked);
                 this.visitorService.getArtistById((artistBooked.artistId))
                     .then((artist: Artist) => {
-
-                        // console.log(artist.name)
                         this.artists.push(artist)
                         if (artistBooked.isFeatured) {
                             this.featuredArtists.push(artist);
                         }
+                        console.log('updateProgram END: ', artistBooked);
                     });
             });
         }
@@ -179,6 +167,7 @@ export class DateComponent implements OnInit {
             // console.log(`if block`)
             // console.log(this.concert.artistsBooked)
             this.concert.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
+                console.log('updateLocal START: ', artistBooked);
                 this.visitorService.getArtistById((artistBooked.artistId))
                     .then((artist: Artist) => {
 
@@ -187,6 +176,7 @@ export class DateComponent implements OnInit {
                         if (artistBooked.isFeatured) {
                             this.featuredArtists.push(artist);
                         }
+                        console.log('updateLocal END: ', artistBooked);
                     });
             });
         }
@@ -211,28 +201,4 @@ export class DateComponent implements OnInit {
 }
 
 
-// onDeleteConcert(e: Event, concertId) {
-//     e.stopPropagation();
-//     console.log(concertId);
-//     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-//         data: {
-//             message: `this will delete the selected concert and all of it's content`
-//         }
-//     })
-//     dialogRef.afterClosed().subscribe((res: boolean) => {
-//         if (res) {
-//             const path = `concerts-2024/${concertId}`
-//             this.fs.deleteDoc(path)
-//                 .then((res: any) => {
-//                     console.log(`concert deleted`)
-//                     this.artists = [];
-//                     this.featuredArtists = [];
-//                     this.concert.id = null;
 
-//                 })
-//                 .catch((err: FirebaseError) => {
-//                     console.error(`failed to delete concert: ${err.message}`)
-//                 })
-//         }
-//     })
-// }

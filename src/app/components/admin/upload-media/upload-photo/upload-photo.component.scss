@@ -1,0 +1,59 @@
+.wrapper {
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    .photo_data_list {
+        min-width: 20rem;
+        background-color: white;
+        padding: 1rem;
+        .photo_data_list_item {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            .date {
+            }
+            .thumbnail {
+                width: 3rem;
+            }
+            // background-color: blue;
+            .buttons {
+                display: flex;
+                flex-direction: row;
+                button {
+                    // background-color: red;
+                }
+            }
+        }
+    }
+    .photo_container {
+        width: 20rem;
+        .active_photo {
+            width: 100%;
+        }
+    }
+    form {
+        // flex-grow: 1;
+        background-color: lightgray;
+        padding: 1rem;
+        max-width: 50rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: auto;
+        .artists-form-array {
+            display: flex;
+            gap: 0.5rem;
+            .artists {
+                .artist {
+                    display: flex;
+                    gap: 0.3rem;
+                }
+            }
+        }
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

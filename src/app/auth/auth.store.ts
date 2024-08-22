@@ -42,16 +42,19 @@ export const AuthStore = signalStore(
     withMethods(
         (store, auth = inject(Auth), adminStore = inject(AdminStore), calendarService = inject(CalendarService)) => ({
             async login(userLogin: UserLogin) {
+                if (userLogin) {
 
-                signInWithEmailAndPassword(auth, userLogin.email, userLogin.password)
-                    .then((userCredential: UserCredential) => {
-                        console.log(userCredential.user.email)
-                        patchState(store, { isLoggedIn: true });
-                    })
-                    .catch((err: AuthError) => {
-                        console.log(err.message)
-                        patchState(store, { isLoggedIn: false })
-                    })
+                    signInWithEmailAndPassword(auth, userLogin.email, userLogin.password)
+                        .then((userCredential: UserCredential) => {
+                            console.log(userCredential.user.email)
+                            patchState(store, { isLoggedIn: true });
+                        })
+                        .catch((err: AuthError) => {
+                            console.log(err.message)
+                            patchState(store, { isLoggedIn: false })
+                        })
+                }
+
             },
             async logout() {
                 console.log('loggin out')

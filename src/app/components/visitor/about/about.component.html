@@ -1,1 +1,182 @@
-<p>about works!</p>
+<div class="component">
+    <div class="header">
+        <div class="title">ABOUT</div>
+        <div class="flags">
+            <img class="flag"
+                (click)="visitorStore.setLanguage('dutch')"
+                src="./../../../../assets/flags/nl-flag.png"
+                alt="dutch"
+                [ngClass]="{'languageSelected': visitorStore.selectedLanguage()==='dutch', 'languageIdle': visitorStore.selectedLanguage()!=='dutch'}">
+            <img class="flag"
+                (click)="visitorStore.setLanguage('english')"
+                src="./../../../../assets/flags/uk-flag.png"
+                alt="english"
+                [ngClass]="{'languageSelected': visitorStore.selectedLanguage()==='english', 'languageIdle': visitorStore.selectedLanguage()!=='english'}">
+        </div>
+    </div>
+
+
+    @if(visitorStore.selectedLanguage()==='dutch'){
+    <div class="schedule">
+        Zondag van 16:30 tot 19:00
+    </div>
+    <div class="content">
+        De langstlopende en volgens sommigen beste sessie is die van Café De Engelbewaarder op de Kloveniersburgwal,
+        zondagmiddag. Hier zijn drummer Victor de Boo, bassist Jacko Schoonderwoerd en pianist Leo Bouwmeester
+        gastheren,
+        die de bijeenkomsten inzetten met een set en de deelnames regelen. De onlangs overleden saxofonist Sean Bergin
+        had
+        hier met hen de leiding. Bergin wordt node gemist, maar de sfeer is niet wezenlijk veranderd. Soms loopt er nog
+        weleens een toerist langs die uitroept: "Where's the big man?" Gaandeweg de middag loopt de Engelbewaarder
+        steevast vol met wat ouder publiek en gaan de muzikanten flink los.
+    </div>
+    }
+    @if(visitorStore.selectedLanguage()==='english'){
+    <div class="schedule">
+        Sundays from 16:30 untill 19:00
+    </div>
+    <div class="content">
+        <p>
+            Renowned professionals and young talent will treat you to live jazz every Sunday afternoon. Come to café De
+            Engelbewaarder in Amsterdam to enjoy a tasty specialty beer and the longest running live jazz session in the
+            Netherlands!
+        </p>
+        <h4>
+            Color your Sunday afternoon!
+        </h4>
+        <p>
+            For almost 40 years, café De Engelbewaarder on Kloveniersburgwal has been home to perhaps the most famous
+            weekly
+            live jazz session in the Netherlands. Legendary jazz musicians such as Woody Shaw, Archie Shepp and David
+            Murray
+            have performed there. To this day, café de Engelbewaarder is the place where you can enjoy top-level jazz on a
+            lazy Sunday afternoon.
+
+            After the opening set, professionals from home and abroad were invited to play along. This creates a lively
+            session full of surprises and at a high level every Sunday afternoon. The session always ends with all
+            participants going wild as if it were a big band.
+
+            The permanent backing band consisting of Leo Bouwmeester on piano, Jacko Schoonderwoerd on double bass and
+            Victor de Boo on drums invites a different guest player every week.
+        </p>
+        <h4>
+            Entrance is free!
+        </h4>
+    </div>
+    }
+
+    <hr class="hr">
+    <div class="address">
+        Café de Engelbewaarder
+        <br>
+        Kloveniersburgwal 59 1011 JZ Amsterdam
+    </div>
+
+
+
+
+</div>
+
+<!-- <div class="component">
+    <div class="main">
+        <div class="directions">
+            <div class="title-flags"
+                fxLayout
+                fxLayoutAlign="space-between">
+                <div class="title">
+                    JAZZENGEL
+                </div>
+                <div class="flags"
+                    fxLayout
+                    fxLayoutGap="1rem">
+                    <img *ngIf="language === 'english'"
+                        (click)="selectLanguage('dutch')"
+                        fxLayoutAlign="end"
+                        class="dutch-flag flag"
+                        src="../../assets/flags/nl-flag.png"
+                        alt="NL">
+                    <img *ngIf="language === 'dutch'"
+                        (click)="selectLanguage('english')"
+                        class="english-flag flag"
+                        src="../../assets/flags/uk-flag.png"
+                        alt="EN">
+                </div>
+            </div>
+            <div class="schedule"
+                *ngIf="language === 'dutch'">
+                Zondag van 16:30 tot 19:00
+            </div>
+            <div class="schedule"
+                *ngIf="language === 'english'">
+                Sundays from 16:30 untill 19:00
+            </div>
+            <hr class="hr">
+            <div class="address">
+                Café de Engelbewaarder
+                <br>
+                Kloveniersburgwal 59 1011 JZ Amsterdam
+            </div>
+
+            <div class="content"
+                *ngIf="language === 'dutch'">
+                De langstlopende en volgens sommigen beste sessie is die van Café De Engelbewaarder op de Kloveniersburgwal,
+                zondagmiddag. Hier zijn drummer Victor de Boo, bassist Jacko Schoonderwoerd en pianist Leo Bouwmeester
+                gastheren,
+                die de bijeenkomsten inzetten met een set en de deelnames regelen. De onlangs overleden saxofonist Sean Bergin
+                had
+                hier met hen de leiding. Bergin wordt node gemist, maar de sfeer is niet wezenlijk veranderd. Soms loopt er nog
+                weleens een toerist langs die uitroept: "Where's the big man?" Gaandeweg de middag loopt de Engelbewaarder
+                steevast vol met wat ouder publiek en gaan de muzikanten flink los.
+            </div>
+
+            <div *ngIf="language === 'english'"
+                class="content">
+                <p>
+                    Renowned professionals and young talent will treat you to live jazz every Sunday afternoon. Come to café De
+                    Engelbewaarder in Amsterdam to enjoy a tasty specialty beer and the longest running live jazz session in the
+                    Netherlands!
+                </p>
+                <h4>
+                    Color your Sunday afternoon!
+                </h4>
+                <p>
+                    For almost 40 years, café De Engelbewaarder on Kloveniersburgwal has been home to perhaps the most famous
+                    weekly
+                    live jazz session in the Netherlands. Legendary jazz musicians such as Woody Shaw, Archie Shepp and David
+                    Murray
+                    have performed there. To this day, café de Engelbewaarder is the place where you can enjoy top-level jazz on a
+                    lazy Sunday afternoon.
+
+                    After the opening set, professionals from home and abroad were invited to play along. This creates a lively
+                    session full of surprises and at a high level every Sunday afternoon. The session always ends with all
+                    participants going wild as if it were a big band.
+
+                    The permanent backing band consisting of Leo Bouwmeester on piano, Jacko Schoonderwoerd on double bass and
+                    Victor de Boo on drums invites a different guest player every week.
+                </p>
+                <h4>
+                    Entrance is free!
+                </h4>
+            </div>
+
+            <div class="author"
+                *ngIf="language === 'dutch'">
+                Jan Jasper Tamboer
+            </div>
+            <div class="date"
+                *ngIf="language === 'dutch'">
+                Parool 29 januari 2013
+            </div>
+            <div class="links">
+                <div class="header">
+                    LINKS:
+                </div>
+                <ul>
+                    <li class="engelbewaarder">
+                        <a href="https://www.cafedeengelbewaarder.nl/home">CAFÉ DE ENGELBEWAARDER</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->

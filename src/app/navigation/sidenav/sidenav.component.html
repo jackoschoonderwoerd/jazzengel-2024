@@ -1,18 +1,23 @@
 <div class="container">
-    <mat-nav-list>
+    <ul class="nav-list">
         <a mat-list-item
+            style="color:var(--yellow)"
+            class="nav-link"
             (click)="onCloseSidenav()"
             routerLink="program">program</a>
-        <a mat-list-item
+        <!-- <a mat-list-item
             (click)="onCloseSidenav()"
-            routerLink="media">media</a>
-        <a mat-list-item
-            routerLink="admin/upload-media"
-            (click)="onCloseSidenav()">upload media</a>
+            routerLink="media">media</a> -->
         <a mat-list-item
             (click)="onCloseSidenav()"
             routerLink="about">about</a>
+        <a mat-list-item
+            (click)="onCloseSidenav()"
+            routerLink="location">location</a>
         @if(authStore.isLoggedIn()) {
+        <a mat-list-item
+            routerLink="admin/upload-media"
+            (click)="onCloseSidenav()">upload media</a>
         <a mat-list-item
             routerLink="admin/stats"
             (click)="onCloseSidenav()">stats</a>
@@ -23,7 +28,7 @@
             routerLink="admin/store"
             (click)="onCloseSidenav()">store</a>
         }
-    </mat-nav-list>
+    </ul>
     <div class="buttons">
         @if(!authStore.isLoggedIn()){
         <button mat-icon-button

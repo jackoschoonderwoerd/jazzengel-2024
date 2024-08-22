@@ -59,27 +59,29 @@ export class ArtistInfoComponent implements OnInit {
         })
     }
     patchForm(artist: Artist) {
-        capitalizeName(artist.name).then((capitalizedArtistName: string) => {
-            artist.name = capitalizedArtistName;
-            this.form.patchValue({
-                name: artist.name,
-                instrument: artist.instrument
-            })
+        // capitalizeName(artist.name).then((capitalizedArtistName: string) => {
+        //     artist.name = capitalizedArtistName;
+        this.form.patchValue({
+            name: artist.name,
+            instrument: artist.instrument
         })
+        // })
     }
     addArtist() {
-        const formvalue = this.form.value
+        const formValue = this.form.value
         if (this.editmode) {
             const path = `artists/${this.id}`
-            const name = formvalue.name;
-            this.fs.updateDoc(path, { name: name })
-                .then((res: any) => {
-                    console.log(`name updated; ${res}`)
-                })
-                .catch((err: FirebaseError) => {
-                    console.error(`failed to update name; ${err.message}`)
-                })
-            const instrument = formvalue.instrument
+            capitalizeName(formValue.name).then((capitalizedName: string) => {
+                const name = capitalizedName;
+                this.fs.updateDoc(path, { name: name })
+                    .then((res: any) => {
+                        console.log(`name updated; ${res}`)
+                    })
+                    .catch((err: FirebaseError) => {
+                        console.error(`failed to update name; ${err.message}`)
+                    })
+            })
+            const instrument = formValue.instrument
             this.fs.updateDoc(path, { instrument: instrument })
                 .then((res: any) => {
                     console.log(`instrument updated; ${res}`)
@@ -91,26 +93,28 @@ export class ArtistInfoComponent implements OnInit {
                     this.router.navigate(['admin/artist', { id: this.id }])
                 })
         } else {
-
-            const artist: Artist = {
-                name: formvalue.name,
-                instrument: formvalue.instrument,
-                biography: null,
-                filePath: null,
-                imageUrl: null
-            }
-            const path = `artists`
-            this.fs.addDoc(path, artist)
-                .then((docRef: DocumentReference) => {
-                    console.log(`artist added; ${docRef.id}`)
-                })
-                .catch((err: FirebaseError) => {
-                    console.error(`failed to add artist; ${err.message}`)
-                })
+            capitalizeName(formValue.name).then((capitalizedName: string) => {
+                const artist: Artist = {
+                    name: capitalizedName,
+                    instrument: formValue.instrument,
+                    biography: null,
+                    filePath: null,
+                    imageUrl: null
+                }
+                const path = `artists`
+                this.fs.addDoc(path, artist)
+                    .then((docRef: DocumentReference) => {
+                        console.log(`artist added; ${docRef.id}`)
+                    })
+                    .catch((err: FirebaseError) => {
+                        console.error(`failed to add artist; ${err.message}`)
+                    })
+            })
         }
     }
 
     onCancel() {
         this.router.navigate(['admin/artist', { id: this.id }])
     }
+
 }

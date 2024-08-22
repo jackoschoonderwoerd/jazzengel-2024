@@ -41,23 +41,26 @@ export class InitArtistComponent implements OnInit {
         })
     }
     addArtist() {
-        const formValue = this.form.value
-        const artist: Artist = {
-            name: formValue.name,
-            instrument: formValue.instrument,
-            biography: null,
-            filePath: null,
-            imageUrl: null
-        }
-        capitalizeName(artist.name).then((artistName: string) => {
-            artist.name = artistName;
-            console.log(artist);
+        const formValue = this.form.value;
+        capitalizeName(formValue.name).then((capitalizedName: string) => {
+
+            const artist: Artist = {
+                name: capitalizedName,
+                instrument: formValue.instrument,
+                biography: null,
+                filePath: null,
+                imageUrl: null
+            }
             const path = `artists`
             this.fs.addDoc(path, artist)
                 .then((docRef: DocumentReference) => {
                     this.dialogRef.close(docRef.id)
                 })
         })
+        // capitalizeName(artist.name).then((artistName: string) => {
+        //     artist.name = artistName;
+        //     console.log(artist);
+        // })
     }
 
     // capitalizeName(name: string) {

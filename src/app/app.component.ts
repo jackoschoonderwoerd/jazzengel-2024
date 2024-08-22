@@ -1,8 +1,8 @@
+// https://github.com/angular/components/issues/8287
+
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FirestoreService } from './services/firestore.service';
-import { DocumentReference } from '@angular/fire/firestore';
-import { FirebaseError } from '@angular/fire/app';
+
 
 import { AuthStore } from './auth/auth.store';
 import { ToolbarComponent } from './navigation/toolbar/toolbar.component';
@@ -18,6 +18,7 @@ import { ThisSundayComponent } from './this-sunday/this-sunday.component';
 import { VisitorService } from './components/visitor/visitor.service';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { CalendarService } from './services/calendar.service';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
     selector: 'app-root',
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
     dialog = inject(MatDialog);
     visitorService = inject(VisitorService)
     calendarService = inject(CalendarService)
+    swUpdate = inject(SwUpdate);
 
     ngOnInit(): void {
 
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit {
 
 
             } else {
-                this.calendarService.getCalendar(0, 3)
+                this.calendarService.getCalendar(0, 10)
                 // this.dialog.open(ThisSundayComponent)
                 // let maxDate = new Date(today.getFullYear(), today.getMonth() + 3, today.getDay())
                 // maxDate = new Date(maxDate.setHours(0, 0, 0, 0))
@@ -65,6 +67,13 @@ export class AppComponent implements OnInit {
                 console.log('no user')
                 // this.adminStore.setVisibleWeeksAhead(12)
             }
-        })
+        });
+        // if (this.swUpdate.isEnabled) {
+        //     this.swUpdate.versionUpdates.subscribe(() => {
+        //         if (confirm('New version available. Load new version?')) {
+        //             window.location.reload();
+        //         }
+        //     });
+        // }
     }
 }

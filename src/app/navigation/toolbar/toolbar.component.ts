@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthStore } from '../../auth/auth.store';
@@ -25,14 +25,19 @@ import { AdminStore } from '../../components/admin/admin.store';
     templateUrl: './toolbar.component.html',
     styleUrl: './toolbar.component.scss'
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
     authStore = inject(AuthStore);
     dialog = inject(MatDialog);
     router = inject(Router);
     adminStore = inject(AdminStore)
+    time: string
 
     @Output() sidenavToggle = new EventEmitter<void>
 
+
+    ngOnInit(): void {
+        this.time = `${new Date().getHours()}:${new Date().getMinutes()}`
+    }
 
     onMenu() {
         console.log(' menu')

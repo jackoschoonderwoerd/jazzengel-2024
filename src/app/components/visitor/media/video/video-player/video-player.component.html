@@ -1,16 +1,28 @@
 <div class="wrapper">
-    @if(isLoading) {
+    <!-- @if(isLoading) {
     <div class="spinner-container">
         <mat-progress-spinner></mat-progress-spinner>
     </div>
-    }
+    } -->
     <iframe #iframeRef
         (load)="onIframeLoad(iframeRef)"
         [src]="downloadUrl()|safe"
-        allowfullscreen>
+        allowfullscreen
+        height="500">
     </iframe>
     <button mat-icon-button
         (click)="onMediaList()">
         <mat-icon>close</mat-icon>
     </button>
+    <!-- <code>
+        <pre>{{video|json}}</pre>
+    </code> -->
+    <div class="artists">
+        @for(artist of video.artists; track artist.name) {
+        <div class="artist">
+            <div class="name">{{artist.name}}</div>
+            <div class="instrument">{{artist.instrument}}</div>
+        </div>
+        }
+    </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, SecurityContext, signal } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, SecurityContext, signal } from '@angular/core';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { JazzengelVideo } from '../../../../models/jazzengel-video';
 import { DatePipe, JsonPipe } from '@angular/common';
@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CapitalizeNamePipe } from '../../../../pipes/capitalize-name.pipe';
+import { take } from 'rxjs';
+import { VideoService } from './video.service';
 
 interface VideoArtist {
     name: string;
@@ -49,18 +51,22 @@ export class VideoComponent implements OnInit {
     router = inject(Router)
     sortedVideoArtists = signal<VideoArtist[]>([])
     activeVideos = signal<JazzengelVideo[]>([])
+    videoService = inject(VideoService)
+
 
     loadMedia() {
         const path = `videos`
-        this.fs.asyncCollection(path).then((videos: JazzengelVideo[]) => {
-            console.log(videos)
+        this.fs.collection(path).pipe(take(1)).subscribe((videos: JazzengelVideo[]) => {
+            // console.log(videos)
             this.videos.set(videos)
             this.url = videos[0].downloadUrl;
             this.getVideoArtists();
         })
     }
-    onPlayMedia(downloadUrl: string) {
-        this.router.navigate(['media-player', { downloadUrl }])
+    onPlayMedia(video: JazzengelVideo) {
+        console.log(video)
+        this.videoService.setVideoSelected(video)
+        this.router.navigate(['media-player', { downloadUrl: video.downloadUrl }])
     }
 
     private getVideoArtists() {
@@ -90,7 +96,7 @@ export class VideoComponent implements OnInit {
                 this.sortedVideoArtists().sort((a: VideoArtist, b: VideoArtist) => a.name.localeCompare(b.name))
             }
         })
-        console.log(this.sortedVideoArtists())
+        // console.log(this.sortedVideoArtists())
 
     }
 

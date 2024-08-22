@@ -4,22 +4,30 @@
         <img (click)="onMenu()"
             src="./../../../assets/icons/icon-72x72.png"
             alt="">
+        <div class="time">{{time}}</div>
     </div>
-    <div class="is-loading">loading: {{adminStore.isLoading()}}</div>
+    <!-- <div class="is-loading">loading: {{adminStore.isLoading()}}</div> -->
     <div class="right">
         <div class="links">
-            <a routerLink="program">program</a>
-            <a routerLink="media">media</a>
-            <a routerLink="about">about</a>
-            <div class="devider">|</div>
-            <!-- @if(authStore.isLoggedIn()) { -->
-            <a routerLink="admin/upload-media">upload media</a>
-            <a routerLink="admin/stats">stats</a>
-            <a routerLink="admin/artists">artists</a>
-            <a routerLink="admin/store">
+            <a routerLinkActive="link-active"
+                routerLink="program">program</a>
+            <!-- <a routerLinkActive="link-active" routerLink="media">media</a> -->
+            <a routerLinkActive="link-active"
+                routerLink="about">about</a>
+            <a routerLinkActive="link-active"
+                routerLink="location">location</a>
+            @if(authStore.isLoggedIn()) {
+            <a routerLinkActive="link-active"
+                routerLink="admin/upload-media">upload media</a>
+            <a routerLinkActive="link-active"
+                routerLink="admin/stats">stats</a>
+            <a routerLinkActive="link-active"
+                routerLink="admin/artists">artists</a>
+            <a routerLinkActive="link-active"
+                routerLink="admin/store">
                 store
             </a>
-            <!-- } -->
+            }
         </div>
         <div class="buttons">
             @if(!authStore.isLoggedIn()){
@@ -34,15 +42,8 @@
             </button>
             }
         </div>
-        <!-- <div class="is-logged-in">{{authStore.isLoggedIn()}}</div> -->
-    </div>
-    <!-- <div>
-        <button (click)="onMenu()"
-            mat-icon-button>
 
-            <mat-icon>menu</mat-icon>
-        </button>
-    </div> -->
+    </div>
 
 
 </mat-toolbar>

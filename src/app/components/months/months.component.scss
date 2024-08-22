@@ -4,7 +4,10 @@ mat-accordion {
         min-width: 370px;
         max-width: 30rem;
         background-color: var(--purple);
-        border: 1px solid var(--yellow);
+        border-bottom: 3px solid var(--yellow);
+        border-left: 3px solid var(--yellow);
+        border-right: 3px solid var(--yellow);
+
         mat-expansion-panel-header {
             mat-panel-title {
                 text-transform: uppercase;

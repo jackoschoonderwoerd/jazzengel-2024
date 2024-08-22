@@ -71,7 +71,6 @@ export class AddConcertComponent implements OnInit {
                 this.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
                     this.visitorService.getArtistById(artistBooked.artistId)
                         .then((artist: Artist) => {
-                            console.log(artist)
                             this.artists.push(artist)
                         })
                 })
