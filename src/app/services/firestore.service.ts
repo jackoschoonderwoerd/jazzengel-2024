@@ -151,7 +151,7 @@ export class FirestoreService {
         return setDoc(docRef, object)
     }
     getDoc(path: string): Observable<any> {
-        console.log(path);
+        // console.log(path);
         const docRef = doc(this.firestore, path)
         return docData(docRef, { idField: 'id' })
     }

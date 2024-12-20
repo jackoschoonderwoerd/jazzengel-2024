@@ -13,7 +13,7 @@
     </mat-form-field>
     <div class="buttons">
         <button mat-raised-button
-            mat-dialog-close>cancel</button>
+            [mat-dialog-close]="false">cancel</button>
         <button mat-raised-button
             (click)="addArtist()">add artist</button>
     </div>

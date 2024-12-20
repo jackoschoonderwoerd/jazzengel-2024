@@ -6,6 +6,7 @@ import { Artist } from '../../../../../models/artist.model';
 import { MatButtonModule } from '@angular/material/button';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FirebaseError } from '@angular/fire/app';
+import { SnackbarService } from '../../../shared/snackbar.service';
 
 @Component({
     selector: 'app-artist-bio',
@@ -30,6 +31,7 @@ export class ArtistBioComponent implements OnInit {
     fs = inject(FirestoreService);
     fb = inject(FormBuilder);
     form!: FormGroup;
+    snackbar = inject(SnackbarService)
     editmode: boolean = false;
     id: string
 
@@ -64,7 +66,7 @@ export class ArtistBioComponent implements OnInit {
         this.router.navigate(['admin/artist', { id: this.id }])
     }
     onSaveChanges() {
-        console.log(this.form.value.editor)
+
         const biography = this.form.value.editor;
         const path = `artists/${this.id}`
         this.fs.updateDoc(path, { biography: biography })
@@ -73,7 +75,7 @@ export class ArtistBioComponent implements OnInit {
                 this.router.navigate(['admin/artist', { id: this.id }])
             })
             .catch((err: FirebaseError) => {
-                console.error(`failed to update biography; ${err.message}`)
+                this.snackbar.openSnackbar(`Operation failed due to: '${err.message}`)
             })
     }
 }

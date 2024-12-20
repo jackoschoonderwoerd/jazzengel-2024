@@ -4,7 +4,10 @@
         <img (click)="onMenu()"
             src="./../../../assets/icons/icon-72x72.png"
             alt="">
-        <div class="time">{{time}}</div>
+        @if(authStore.userEmail) {
+        <span>{{authStore.userEmail()}}</span>
+        }
+        <!-- <div class="time">{{time}}</div> -->
     </div>
     <!-- <div class="is-loading">loading: {{adminStore.isLoading()}}</div> -->
     <div class="right">

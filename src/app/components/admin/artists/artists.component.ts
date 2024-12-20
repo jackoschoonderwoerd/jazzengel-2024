@@ -38,7 +38,9 @@ export class ArtistsComponent {
     onAddArtist() {
         const dialogRef = this.dialog.open(InitArtistComponent)
         dialogRef.afterClosed().subscribe((id) => {
-            this.router.navigate(['admin/artist', { id: id }])
+            if (id) {
+                this.router.navigate(['admin/artist', { id: id }])
+            }
         })
     }
     onEdit(artist: Artist) {

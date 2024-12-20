@@ -47,7 +47,7 @@ div.mat-expansion-panel-body {
     box-sizing: border-box;
 }
 .mat-mdc-tab .mdc-tab__text-label {
-    color: yellow !important;
+    color: var(--eb-blue) !important;
 }
 
 .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
@@ -55,7 +55,7 @@ div.mat-expansion-panel-body {
     text-transform: uppercase;
 }
 .mat-mdc-tab .mdc-tab-indicator__content--underline {
-    border-color: yellow !important;
+    border-color: var(--eb-yellow) !important;
 }
 
 .mat-mdc-tab-body-wrapper > .mat-mdc-tab-body > .mat-mdc-tab-body-content > .image-container > img {

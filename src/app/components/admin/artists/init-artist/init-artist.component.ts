@@ -1,13 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Artist } from '../../../../models/artist.model';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { DocumentReference } from '@angular/fire/firestore';
 import { capitalizeName } from '../../helpers/capitalizeName';
+import { FirebaseError } from '@angular/fire/app';
+import { SnackbarService } from '../../shared/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-init-artist',
@@ -17,7 +20,8 @@ import { capitalizeName } from '../../helpers/capitalizeName';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        MatLabel
+        MatLabel,
+        MatDialogModule
     ],
     templateUrl: './init-artist.component.html',
     styleUrl: './init-artist.component.scss'
@@ -25,7 +29,9 @@ import { capitalizeName } from '../../helpers/capitalizeName';
 export class InitArtistComponent implements OnInit {
 
     fs = inject(FirestoreService)
-    fb = inject(FormBuilder)
+    fb = inject(FormBuilder);
+    router = inject(Router)
+    snackbarService = inject(SnackbarService)
     form: FormGroup
 
     constructor(private dialogRef: MatDialogRef<InitArtistComponent>) { }
@@ -56,42 +62,16 @@ export class InitArtistComponent implements OnInit {
                 .then((docRef: DocumentReference) => {
                     this.dialogRef.close(docRef.id)
                 })
+                .catch((err: FirebaseError) => {
+                    this.snackbarService.openSnackbar(`Operation failed due to: ${err.message}`);
+                    this.router.navigateByUrl('/admin/artists');
+                })
         })
-        // capitalizeName(artist.name).then((artistName: string) => {
-        //     artist.name = artistName;
-        //     console.log(artist);
-        // })
+    }
+    onCancel() {
+
     }
 
-    // capitalizeName(name: string) {
-    //     const promise = new Promise((resolve, reject) => {
 
-    //         console.log(name)
-    //         const uppercaseName: string = '';
-    //         const exceptions: string[] = [
-    //             'van', 'der', 'den', 'de', 'of', 'the', 'and'
-    //         ]
-    //         const nameSections: string[] = name.split(' ');
-    //         console.log(nameSections)
-    //         const nameSectionsLowerCase: string[] = []
-    //         nameSections.forEach((section: string) => {
-    //             nameSectionsLowerCase.push(section.toLowerCase())
-    //         })
-    //         console.log(nameSectionsLowerCase)
-    //         const upperCasedSections: string[] = []
-    //         nameSectionsLowerCase.forEach((section: string) => {
-
-    //             if (!exceptions.includes(section)) {
-    //                 section = section.charAt(0).toUpperCase() + section.slice(1).toLowerCase()
-    //                 upperCasedSections.push(section)
-    //             } else {
-    //                 upperCasedSections.push(section);
-    //             }
-    //         })
-    //         const upperCaseName = upperCasedSections.join(' ')
-    //         resolve(upperCaseName)
-    //     })
-    //     return promise
-    // }
 
 }

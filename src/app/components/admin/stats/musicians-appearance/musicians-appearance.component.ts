@@ -59,6 +59,7 @@ export class MusiciansAppearanceComponent implements OnInit {
         const path = `bookings`;
         this.fs.collection(path).pipe(take(1)).subscribe((bookings: any) => {
             bookings.forEach((booking: any) => {
+
                 this.appearances.push(this.extractAppearance(booking.booking));
 
             })

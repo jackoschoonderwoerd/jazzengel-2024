@@ -10,5 +10,5 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     styleUrl: './stats.component.scss'
 })
 export class StatsComponent {
-    componentNames: string[] = ['musicians-appearance'];
+    componentNames: string[] = ['musicians-appearance', 'appearance'];
 }

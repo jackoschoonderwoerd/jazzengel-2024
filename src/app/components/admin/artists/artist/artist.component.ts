@@ -49,7 +49,6 @@ export class ArtistComponent implements OnInit {
                 this.id = params.id;
                 const path = `artists/${params.id}`
                 this.fs.getDoc(path).subscribe((artist: Artist) => {
-                    console.log('ARTIST: ', artist)
                     this.artist = artist;
                 })
 

@@ -1,3 +1,22 @@
 mat-toolbar {
     background-color: aquamarine;
+
+    ul {
+        display: flex;
+        gap: 1rem;
+        li {
+            a {
+                padding: 0 0.5rem 0.5rem 0.5rem;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+router-outlet {
+    margin-top: 64px;
+}
+
+.link-active {
+    background-color: red;
+    color: white;
 }

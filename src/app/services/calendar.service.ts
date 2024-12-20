@@ -31,9 +31,10 @@ export class CalendarService {
 
 
         const now: Date = new Date(new Date().setHours(0, 0, 0, 0))
-        const firstSundayTimestamp = now.setDate(now.getDate() - now.getDay() + 7); //start at next sunday
+        const firstSundayTimestamp = now.setDate(now.getDate() - now.getDay()); //start at next sunday
 
         const firstSundayDate = new Date(firstSundayTimestamp)
+
 
         const rangeStartDate: Date = new Date(firstSundayDate.setHours(0, 0, 0, 0))
         const rangeStartTimestamp = rangeStartDate.getTime();

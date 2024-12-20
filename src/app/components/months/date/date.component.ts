@@ -21,6 +21,7 @@ import { CalendarService } from '../../../services/calendar.service';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from '../../admin/shared/confirm-dialog/confirm-dialog.component';
+import { SnackbarService } from '../../admin/shared/snackbar.service';
 
 
 
@@ -54,7 +55,8 @@ export class DateComponent implements OnInit {
     auth = inject(Auth)
     authStore = inject(AuthStore);
     visitorService = inject(VisitorService)
-    calendarService = inject(CalendarService)
+    calendarService = inject(CalendarService);
+    snackbar = inject(SnackbarService)
 
 
 
@@ -86,7 +88,7 @@ export class DateComponent implements OnInit {
                             this.updateLocal(concert);
                         })
                         .catch((err: FirebaseError) => {
-                            console.error(`failed to update concert: ${err.message}`)
+                            this.snackbar.openSnackbar(`Operation failed due to: ${err.message}`)
                         })
                 } else if (concert && !concert.id) {
                     this.addConcert(concert)
@@ -96,7 +98,7 @@ export class DateComponent implements OnInit {
                             this.updateLocal(concert);
                         })
                         .catch((err: FirebaseError) => {
-                            console.error(`failed to update concert: ${err.message}`)
+                            this.snackbar.openSnackbar(`Operation failed due to: ${err.message}`)
                         })
                 }
             })
@@ -139,14 +141,14 @@ export class DateComponent implements OnInit {
         this.featuredArtists = [];
         if (this.concert.artistsIdFeatured.length) {
             this.concert.artistsIdFeatured.forEach((artistBooked: ArtistIdFeatured) => {
-                console.log('updateProgram START: ', artistBooked);
+                // console.log('updateProgram START: ', artistBooked);
                 this.visitorService.getArtistById((artistBooked.artistId))
                     .then((artist: Artist) => {
                         this.artists.push(artist)
                         if (artistBooked.isFeatured) {
                             this.featuredArtists.push(artist);
                         }
-                        console.log('updateProgram END: ', artistBooked);
+                        // console.log('updateProgram END: ', artistBooked);
                     });
             });
         }

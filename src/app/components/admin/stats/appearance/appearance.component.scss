@@ -1,0 +1,15 @@
+main {
+    max-width: 600px;
+    margin: auto;
+    .header {
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        mat-slide-toggle {
+            background-color: white;
+            padding: 0 0.5rem 0.5rem 0.5rem;
+            border-radius: 3px;
+        }
+    }
+}
