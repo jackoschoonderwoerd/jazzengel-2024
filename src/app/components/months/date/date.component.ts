@@ -27,7 +27,6 @@ import { SnackbarService } from '../../admin/shared/snackbar.service';
 
 @Component({
     selector: 'app-date',
-    standalone: true,
     imports: [
         MatExpansionModule,
         JsonPipe,
@@ -38,8 +37,7 @@ import { SnackbarService } from '../../admin/shared/snackbar.service';
         MatIconModule
     ],
     templateUrl: './date.component.html',
-    styleUrl: './date.component.scss',
-    // encapsulation: ViewEncapsulation.None
+    styleUrl: './date.component.scss'
 })
 export class DateComponent implements OnInit {
     @Input() public concert!: Concert;

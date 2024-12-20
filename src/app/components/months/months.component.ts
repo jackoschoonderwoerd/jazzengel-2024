@@ -13,7 +13,6 @@ import { AuthStore } from '../../auth/auth.store';
 
 @Component({
     selector: 'app-concerts',
-    standalone: true,
     imports: [
         MatButtonModule,
         MatExpansionModule,

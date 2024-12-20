@@ -4,7 +4,6 @@ import { VideoComponent } from "../../visitor/media/video/video.component";
 
 @Component({
     selector: 'app-media',
-    standalone: true,
     imports: [MatTabsModule, VideoComponent],
     templateUrl: './media.component.html',
     styleUrl: './media.component.scss'

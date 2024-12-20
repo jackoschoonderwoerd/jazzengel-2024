@@ -23,7 +23,6 @@ import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
     selector: 'app-musicians-appearance',
-    standalone: true,
     imports: [
         MatFormFieldModule,
         MatInputModule,
@@ -35,7 +34,6 @@ import { MatSelectionListChange } from '@angular/material/list';
         FormsModule,
         JsonPipe,
         DatePipe,
-
     ],
     templateUrl: './musicians-appearance.component.html',
     styleUrl: './musicians-appearance.component.scss'

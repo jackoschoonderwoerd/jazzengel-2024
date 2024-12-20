@@ -10,7 +10,6 @@ import { UserLogin } from '../../models/user-login.model';
 
 @Component({
     selector: 'app-sidenav',
-    standalone: true,
     imports: [
         MatButtonModule,
         MatIconModule,

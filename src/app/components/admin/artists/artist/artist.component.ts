@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-artist',
-    standalone: true,
     imports: [
         ArtistBioComponent,
         ArtistImageComponent,
@@ -24,7 +23,6 @@ import { MatIconModule } from '@angular/material/icon';
         CapitalizeNamePipe,
         MatButtonModule,
         MatIconModule
-
     ],
     templateUrl: './artist.component.html',
     styleUrl: './artist.component.scss'

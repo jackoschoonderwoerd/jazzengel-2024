@@ -20,7 +20,6 @@ import { LargePhotoDialogComponent } from './large-photo-dialog/large-photo-dial
 
 @Component({
     selector: 'app-upload-photo',
-    standalone: true,
     imports: [
         MatButtonModule,
         ReactiveFormsModule,
@@ -34,8 +33,6 @@ import { LargePhotoDialogComponent } from './large-photo-dialog/large-photo-dial
         JsonPipe,
         MatDatepickerModule,
         MatIconModule
-
-
     ],
     templateUrl: './upload-photo.component.html',
     styleUrl: './upload-photo.component.scss'

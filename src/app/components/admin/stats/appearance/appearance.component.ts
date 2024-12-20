@@ -27,7 +27,6 @@ interface DataSourceConcert {
 
 @Component({
     selector: 'app-appearance',
-    standalone: true,
     imports: [MatTableModule,
         MatSortModule,
         MatIconModule,

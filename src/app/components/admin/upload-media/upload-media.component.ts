@@ -23,7 +23,6 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-upload-media',
-    standalone: true,
     imports: [
         MatButtonModule,
         MatListModule,
@@ -39,10 +38,9 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
         MatToolbarModule,
         RouterOutlet,
         RouterLink
-
     ],
     templateUrl: './upload-media.component.html',
-    styleUrl: './upload-media.component.scss',
+    styleUrl: './upload-media.component.scss'
 })
 
 

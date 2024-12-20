@@ -17,7 +17,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-artist-2024',
-    standalone: true,
     imports: [
         MatButtonModule,
         MatIconModule,

@@ -10,7 +10,6 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-video-player',
-    standalone: true,
     imports: [MatButtonModule, SafePipe, MatIconModule, MatProgressSpinner, JsonPipe],
     templateUrl: './video-player.component.html',
     styleUrl: './video-player.component.scss'

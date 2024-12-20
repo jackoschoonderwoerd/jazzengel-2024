@@ -4,7 +4,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-stats',
-    standalone: true,
     imports: [RouterOutlet, MatToolbarModule, RouterModule],
     templateUrl: './stats.component.html',
     styleUrl: './stats.component.scss'

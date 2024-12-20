@@ -12,7 +12,6 @@ import { FirestoreService } from '../../../../services/firestore.service';
 
 @Component({
     selector: 'app-artist-bio',
-    standalone: true,
     imports: [
         MatExpansionModule,
         JsonPipe,
@@ -23,10 +22,7 @@ import { FirestoreService } from '../../../../services/firestore.service';
         CapitalizeNamePipe
     ],
     templateUrl: './artist-bio.component.html',
-    styleUrl: './artist-bio.component.scss',
-
-    // encapsulation: ViewEncapsulation.None
-    // encapsulation: ViewEncapsulation.None
+    styleUrl: './artist-bio.component.scss'
 })
 export class ArtistBioComponent {
     @Input() public artist!: Artist;

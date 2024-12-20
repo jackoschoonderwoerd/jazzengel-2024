@@ -6,7 +6,6 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-admin',
-    standalone: true,
     imports: [MatToolbarModule, RouterModule, JsonPipe],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss'

@@ -23,7 +23,6 @@ import { WarnDialogComponent } from '../../../admin/shared/warn-dialog/warn-dial
 
 @Component({
     selector: 'app-add-concert',
-    standalone: true,
     imports: [
         DatePipe,
         MatDialogModule,

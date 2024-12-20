@@ -13,7 +13,6 @@ import { VisitorService } from '../components/visitor/visitor.service';
 
 @Component({
     selector: 'app-this-sunday',
-    standalone: true,
     imports: [JsonPipe, DatePipe, MatIconModule, MatDialogModule, CapitalizeNamePipe],
     templateUrl: './this-sunday.component.html',
     styleUrl: './this-sunday.component.scss'

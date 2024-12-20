@@ -12,7 +12,6 @@ import { AdminStore } from '../../components/admin/admin.store';
 
 @Component({
     selector: 'app-toolbar',
-    standalone: true,
     imports: [
         MatToolbarModule,
         MatIconModule,

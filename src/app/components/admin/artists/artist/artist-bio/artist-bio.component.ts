@@ -10,7 +10,6 @@ import { SnackbarService } from '../../../shared/snackbar.service';
 
 @Component({
     selector: 'app-artist-bio',
-    standalone: true,
     imports: [EditorModule, ReactiveFormsModule, MatButtonModule],
     templateUrl: './artist-bio.component.html',
     styleUrl: './artist-bio.component.scss'

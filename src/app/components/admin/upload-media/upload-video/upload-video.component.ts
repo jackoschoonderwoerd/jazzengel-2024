@@ -17,7 +17,6 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-video',
-    standalone: true,
     imports: [
         MatButtonModule,
         ReactiveFormsModule,
@@ -29,7 +28,8 @@ import { Router } from '@angular/router';
         SafePipe,
         DatePipe,
         JsonPipe,
-        MatDatepickerModule],
+        MatDatepickerModule
+    ],
     templateUrl: './upload-video.component.html',
     styleUrl: './upload-video.component.scss'
 })

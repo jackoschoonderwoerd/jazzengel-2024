@@ -6,7 +6,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-about',
-    standalone: true,
     imports: [NgClass],
     templateUrl: './about.component.html',
     styleUrl: './about.component.scss'

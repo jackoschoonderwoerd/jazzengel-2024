@@ -14,7 +14,6 @@ import { capitalizeName } from '../../../helpers/capitalizeName';
 
 @Component({
     selector: 'app-artist-info',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         MatFormFieldModule,

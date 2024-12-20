@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-large-photo-dialog',
-    standalone: true,
     imports: [],
     templateUrl: './large-photo-dialog.component.html',
     styleUrl: './large-photo-dialog.component.scss'

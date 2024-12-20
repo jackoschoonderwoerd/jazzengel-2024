@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-init-artist',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         MatFormFieldModule,

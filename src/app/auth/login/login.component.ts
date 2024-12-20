@@ -8,7 +8,6 @@ import { UserLogin } from '../../models/user-login.model';
 
 @Component({
     selector: 'app-login',
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         MatFormFieldModule,

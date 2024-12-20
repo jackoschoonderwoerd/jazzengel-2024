@@ -20,7 +20,6 @@ interface VideoArtist {
 
 @Component({
     selector: 'app-video',
-    standalone: true,
     imports: [
         JsonPipe,
         DatePipe,

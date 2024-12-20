@@ -4,7 +4,6 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-store',
-    standalone: true,
     imports: [JsonPipe],
     templateUrl: './store.component.html',
     styleUrl: './store.component.scss'

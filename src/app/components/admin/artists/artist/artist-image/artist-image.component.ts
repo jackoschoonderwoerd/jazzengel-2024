@@ -13,7 +13,6 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 
 @Component({
     selector: 'app-artist-image',
-    standalone: true,
     imports: [MatButtonModule, CapitalizeNamePipe],
     templateUrl: './artist-image.component.html',
     styleUrl: './artist-image.component.scss'
