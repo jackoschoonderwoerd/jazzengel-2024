@@ -1,20 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { StorageService } from '../../../services/storage.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatLabel } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FirestoreService } from '../../../services/firestore.service';
-import { FirebaseError } from '@angular/fire/app';
-import { JazzengelVideo } from '../../../models/jazzengel-video';
-import { NgFor } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { SafePipe } from '../../../pipes/safe.pipe';
-// import { Artist } from '../../../models/artist.model';
-import { ArtistForMedia } from '../../../models/artist-for-media';
-import { DocumentReference } from '@angular/fire/firestore';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { UploadVideoComponent } from './upload-video/upload-video.component';
+
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -26,15 +13,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
     imports: [
         MatButtonModule,
         MatListModule,
-        // ReactiveFormsModule,
-        // MatInputModule,
-        // MatLabel,
-        // MatFormFieldModule,
-        // NgFor,
-        // MatIconModule,
-        // SafePipe,
-        // MatDatepickerModule,
-        UploadVideoComponent,
+
         MatToolbarModule,
         RouterOutlet,
         RouterLink

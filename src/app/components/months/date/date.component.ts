@@ -1,27 +1,26 @@
-import { Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Concert } from '../../../models/concert.model';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Artist } from '../../../models/artist.model';
 import { FirestoreService } from '../../../services/firestore.service';
-import { take, merge } from 'rxjs';
-import { AsyncPipe, JsonPipe, NgStyle } from '@angular/common';
+
 import { ArtistIdFeatured } from '../../../models/artist-id-featured.model';
 import { ArtistBioComponent } from './artist-bio/artist-bio.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddConcertComponent } from './add-concert/add-concert.component';
-import { CapitalizeNamePipe } from '../../../pipes/capitalize-name.pipe';
-import { ThisSundayComponent } from '../../../this-sunday/this-sunday.component';
+
 import { AdminStore } from '../../admin/admin.store';
 import { Auth } from '@angular/fire/auth';
 import { AuthStore } from '../../../auth/auth.store';
 import { VisitorService } from '../../visitor/visitor.service';
-import { Observable } from 'tinymce';
+
 import { FirebaseError } from '@angular/fire/app';
 import { CalendarService } from '../../../services/calendar.service';
 import { DocumentReference } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon';
-import { ConfirmDialogComponent } from '../../admin/shared/confirm-dialog/confirm-dialog.component';
+
 import { SnackbarService } from '../../admin/shared/snackbar.service';
+import { JsonPipe } from '@angular/common';
 
 
 
@@ -29,12 +28,9 @@ import { SnackbarService } from '../../admin/shared/snackbar.service';
     selector: 'app-date',
     imports: [
         MatExpansionModule,
-        JsonPipe,
         ArtistBioComponent,
-        NgStyle,
-        CapitalizeNamePipe,
-        AsyncPipe,
-        MatIconModule
+        MatIconModule,
+        JsonPipe
     ],
     templateUrl: './date.component.html',
     styleUrl: './date.component.scss'

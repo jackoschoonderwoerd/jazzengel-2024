@@ -21,14 +21,12 @@ mat-toolbar {
         gap: 1rem;
         align-items: center;
         .links {
+            display: flex;
+            gap: 1rem;
             @media only screen and (min-device-width: 320px) and (max-device-width: 700px) {
                 display: none;
             }
-            // border: 1px solid red;
-            // justify-content: center;
-            // align-items: center;
-            display: flex;
-            gap: 1rem;
+
             a {
                 padding: 0 0.3rem;
                 text-transform: uppercase;

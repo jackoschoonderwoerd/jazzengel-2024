@@ -1,11 +1,11 @@
-import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Artist } from '../../../../models/artist.model';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { JsonPipe } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CapitalizeNamePipe } from '../../../../pipes/capitalize-name.pipe';
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdminStore } from '../../../admin/admin.store';
 import { FirestoreService } from '../../../../services/firestore.service';
@@ -14,12 +14,12 @@ import { FirestoreService } from '../../../../services/firestore.service';
     selector: 'app-artist-bio',
     imports: [
         MatExpansionModule,
-        JsonPipe,
+
         MatCardModule,
         MatButtonModule,
         MatTabsModule,
         MatIconModule,
-        CapitalizeNamePipe
+
     ],
     templateUrl: './artist-bio.component.html',
     styleUrl: './artist-bio.component.scss'

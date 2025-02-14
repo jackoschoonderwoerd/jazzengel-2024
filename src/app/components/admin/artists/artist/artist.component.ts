@@ -1,15 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ArtistBioComponent } from './artist-bio/artist-bio.component';
-import { ArtistImageComponent } from './artist-image/artist-image.component';
-import { ArtistInfoComponent } from './artist-info/artist-info.component';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirestoreService } from '../../../../services/firestore.service';
-import { CapitalizeNamePipe } from '../../../../pipes/capitalize-name.pipe';
+
 import { MatButtonModule } from '@angular/material/button';
 import { StorageService } from '../../../../services/storage.service';
 import { Artist } from '../../../../models/artist.model';
-import { ImageData } from '../../../../models/image-data';
-import { FirebaseError } from '@angular/fire/app';
+
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -17,10 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-artist',
     imports: [
-        ArtistBioComponent,
-        ArtistImageComponent,
-        ArtistInfoComponent,
-        CapitalizeNamePipe,
+
         MatButtonModule,
         MatIconModule
     ],

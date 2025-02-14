@@ -1,5 +1,5 @@
-import { DatePipe, JsonPipe, NgStyle } from '@angular/common';
-import { Component, EventEmitter, inject, OnInit } from '@angular/core';
+import { DatePipe, NgStyle } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminStore } from '../../../admin/admin.store';
@@ -10,12 +10,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ArtistIdFeatured } from '../../../../models/artist-id-featured.model';
 import { Concert } from '../../../../models/concert.model';
 import { FirestoreService } from '../../../../services/firestore.service';
-import { DocumentReference } from '@angular/fire/firestore';
+
 import { FirebaseError } from '@angular/fire/app';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from '../../../admin/shared/confirm-dialog/confirm-dialog.component';
-import { take } from 'rxjs';
+
 import { VisitorService } from '../../../visitor/visitor.service';
 
 import { CalendarService } from '../../../../services/calendar.service';
@@ -27,7 +27,6 @@ import { WarnDialogComponent } from '../../../admin/shared/warn-dialog/warn-dial
         DatePipe,
         MatDialogModule,
         MatSelectModule,
-        JsonPipe,
         ReactiveFormsModule,
         MatCheckboxModule,
         MatButtonModule,

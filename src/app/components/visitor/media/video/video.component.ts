@@ -21,13 +21,10 @@ interface VideoArtist {
 @Component({
     selector: 'app-video',
     imports: [
-        JsonPipe,
         DatePipe,
-        SafePipe,
         MatIconModule,
         MatButtonModule,
         MatExpansionModule,
-        CapitalizeNamePipe
     ],
     templateUrl: './video.component.html',
     styleUrl: './video.component.scss'

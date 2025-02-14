@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { StorageService } from '../../../../services/storage.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FirestoreService } from '../../../../services/firestore.service';
 import { FirebaseError } from '@angular/fire/app';
 import { JazzengelVideo } from '../../../../models/jazzengel-video';
-import { DatePipe, JsonPipe, NgFor } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { SafePipe } from '../../../../pipes/safe.pipe';
 import { ArtistForMedia } from '../../../../models/artist-for-media';
@@ -27,7 +27,6 @@ import { Router } from '@angular/router';
         MatIconModule,
         SafePipe,
         DatePipe,
-        JsonPipe,
         MatDatepickerModule
     ],
     templateUrl: './upload-video.component.html',

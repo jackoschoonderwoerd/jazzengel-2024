@@ -14,9 +14,9 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
-import { FooterComponent } from './navigation/footer/footer.component';
+
 import { MatDialog } from '@angular/material/dialog';
-import { ThisSundayComponent } from './this-sunday/this-sunday.component';
+
 import { VisitorService } from './components/visitor/visitor.service';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { CalendarService } from './services/calendar.service';
@@ -31,7 +31,6 @@ import { SwUpdate } from '@angular/service-worker';
         SidenavComponent,
         MatSidenavModule,
         SidenavComponent,
-        FooterComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

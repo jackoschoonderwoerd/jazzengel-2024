@@ -1,15 +1,25 @@
 main {
-    max-width: 600px;
-    margin: auto;
-    .header {
-        padding-top: 1rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 1rem;
+    .left {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        button,
+        mat-slide-toggle {
+            margin-bottom: 1rem;
+        }
+        // gap: 1rem;
         mat-slide-toggle {
             background-color: white;
             padding: 0 0.5rem 0.5rem 0.5rem;
             border-radius: 3px;
         }
+    }
+    .table {
+        width: 100%;
+        height: fit-content;
+        min-width: 0;
     }
 }

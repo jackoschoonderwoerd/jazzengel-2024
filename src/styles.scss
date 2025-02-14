@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "./styles/variables";
-@import "./styles/mixins";
-@import "./styles/engelbewaarder-bis";
+@use "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@use "./styles/variables";
+@use "./styles/mixins";
+@use "./styles/engelbewaarder-bis";
 
 * {
     font-family: "Oswald", sans-serif;

@@ -13,6 +13,7 @@
                      <div class="date"
                          (click)="onDate($event)">{{concert.date.getDate()}}</div>
                      <ul>
+                         <!-- {{featuredArtists|json}} -->
                          @for(artist of featuredArtists; track artist.id) {
                          <li>
                              {{artist.name}}
@@ -23,17 +24,7 @@
                  <!-- } -->
              </mat-panel-description>
          </mat-expansion-panel-header>
-         <!-- @if(concert.id) {
-         <div class="id">{{concert.id}}</div>
-         } @else {
-         <div class="no-id">no id</div>
-         }
-         @if(concert.date) {
-         <div class="date">{{concert.date}}</div>
 
-         } @else {
-         <div class="no-date">no date</div>
-         } -->
          @if(artists && artists.length) {
          @for(artist of artists;track artist.id){
          <app-artist-bio [artist]="artist"></app-artist-bio>

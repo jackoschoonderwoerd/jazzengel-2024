@@ -4,16 +4,16 @@ import { FirestoreService } from '../../../../../services/firestore.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Artist } from '../../../../../models/artist.model';
 import { MatButtonModule } from '@angular/material/button';
-import { ImageData } from '../../../../../models/image-data';
+
 import { StorageService } from '../../../../../services/storage.service';
 import { FirebaseError } from '@angular/fire/app';
-import { CapitalizeNamePipe } from '../../../../../pipes/capitalize-name.pipe';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-artist-image',
-    imports: [MatButtonModule, CapitalizeNamePipe],
+    imports: [MatButtonModule],
     templateUrl: './artist-image.component.html',
     styleUrl: './artist-image.component.scss'
 })

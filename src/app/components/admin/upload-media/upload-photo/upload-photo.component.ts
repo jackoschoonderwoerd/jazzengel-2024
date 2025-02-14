@@ -5,9 +5,9 @@ import { FirestoreService } from '../../../../services/firestore.service';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { DatePipe, JsonPipe, NgFor } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { SafePipe } from '../../../../pipes/safe.pipe';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArtistForMedia } from '../../../../models/artist-for-media';
 import { JazzengelPhoto } from '../../../../models/jazzengel-photo';
@@ -28,9 +28,7 @@ import { LargePhotoDialogComponent } from './large-photo-dialog/large-photo-dial
         MatFormFieldModule,
         NgFor,
         MatIconModule,
-        SafePipe,
         DatePipe,
-        JsonPipe,
         MatDatepickerModule,
         MatIconModule
     ],

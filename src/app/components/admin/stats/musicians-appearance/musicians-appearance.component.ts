@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { AdminStore } from '../../admin.store';
-import { DatePipe, JsonPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table'
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,7 +15,7 @@ import { take } from 'rxjs';
 
 
 
-import { MatSelectionListChange } from '@angular/material/list';
+
 
 
 
@@ -32,7 +32,7 @@ import { MatSelectionListChange } from '@angular/material/list';
         MatSelectModule,
         MatButtonModule,
         FormsModule,
-        JsonPipe,
+
         DatePipe,
     ],
     templateUrl: './musicians-appearance.component.html',

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SafePipe } from '../../../../../pipes/safe.pipe';
@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'app-video-player',
-    imports: [MatButtonModule, SafePipe, MatIconModule, MatProgressSpinner, JsonPipe],
+    imports: [MatButtonModule, SafePipe, MatIconModule],
     templateUrl: './video-player.component.html',
     styleUrl: './video-player.component.scss'
 })
