@@ -1,0 +1,13 @@
+<h1>visits</h1>
+
+<div class="visits">
+    <div class="visits">
+        @for(visit of visitsStore?.visitsArray(); track visit){
+        <div class="visit"><span>{{visit.date.seconds*1000|date:'medium'}}</span>
+
+            <mat-icon (click)="onDeleteForever(visit)">delete_forever</mat-icon>
+        </div>
+        }
+    </div>
+
+</div>

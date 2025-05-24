@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { VisitsComponent } from './shared/visits/visits.component';
 
 export const ADMIN_ROUTES: Routes = [
     {
@@ -44,6 +45,11 @@ export const ADMIN_ROUTES: Routes = [
             .then(c => c.UploadMediaComponent),
         loadChildren: () => import('./upload-media/upload-media.routes')
             .then(r => r.UPLOAD_MEDIA_ROUTES)
+    },
+    {
+        path: 'visits',
+        loadComponent: () => import('./shared/visits/visits.component')
+            .then(c => c.VisitsComponent)
     }
 
 

@@ -21,6 +21,7 @@ import { VisitorService } from './components/visitor/visitor.service';
 import { LoadingIndicatorComponent } from './loading-indicator/loading-indicator.component';
 import { CalendarService } from './services/calendar.service';
 import { SwUpdate } from '@angular/service-worker';
+import { VisitsStore } from './components/admin/shared/visits/visits.store';
 
 @Component({
     selector: 'app-root',
@@ -44,11 +45,13 @@ export class AppComponent implements OnInit {
     visitorService = inject(VisitorService)
     calendarService = inject(CalendarService)
     swUpdate = inject(SwUpdate);
+    visitsStore = inject(VisitsStore)
 
     ngOnInit(): void {
 
         this.adminStore.loadArtists();
         this.visitorService.getArtists();
+        this.visitsStore.loadAllVisits();
         onAuthStateChanged(this.afAuth, (user: FirebaseUser | null) => {
             console.log(`onAuthStateChanged()`)
             // const today: Date = new Date(new Date().setHours(0, 0, 0, 0))
