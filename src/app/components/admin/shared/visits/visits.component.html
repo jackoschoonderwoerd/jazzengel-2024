@@ -1,8 +1,7 @@
-<h1>visits</h1>
-
 <div class="visits">
+    <h4>total visits <span>{{visitsStore.visitsArray().length}}</span></h4>
     <div class="visits">
-        @for(visit of visitsStore?.visitsArray(); track visit){
+        @for(visit of visitsStore.visitsArray(); track visit){
         <div class="visit"><span>{{visit.date.seconds*1000|date:'medium'}}</span>
 
             <mat-icon (click)="onDeleteForever(visit)">delete_forever</mat-icon>

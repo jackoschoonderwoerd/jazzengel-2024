@@ -17,10 +17,20 @@ export class CalendarService {
     constructor() { }
     allArtists: Artist[] = [];
 
-
+    getNextSundayTimestamp(fromDate = new Date()) {
+        const date = new Date(fromDate);
+        const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+        const daysUntilNextSunday = (7 - day) % 7 || 7;
+        date.setDate(date.getDate() + daysUntilNextSunday);
+        console.log(date)
+        const timestampNextSunday = Math.floor(date.getTime());
+        console.log(timestampNextSunday)
+        return timestampNextSunday;
+    }
 
 
     getCalendar(monthsBefore: number, monthsAhead: number) {
+        this.getNextSundayTimestamp()
         console.log('getCalendar()')
         console.log('MONTHSAHEAD: ', monthsAhead)
         const start: number = new Date().getTime()
@@ -31,7 +41,13 @@ export class CalendarService {
 
 
         const now: Date = new Date(new Date().setHours(0, 0, 0, 0))
-        const firstSundayTimestamp = now.setDate(now.getDate() - now.getDay()); //start at next sunday
+        // const firstSundayTimestamp = now.setDate(now.getDate() - now.getDay()); //start at next sunday
+
+        const firstSundayTimestamp = this.getNextSundayTimestamp()
+
+
+        console.log(firstSundayTimestamp);
+        console.log(new Date(firstSundayTimestamp))
 
         const firstSundayDate = new Date(firstSundayTimestamp)
 
